@@ -1,0 +1,5138 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>DCSoft.Utility</name>
+  </assembly>
+  <members>
+    <member name="T:DCSoft.Utility.Configuration.JHAppSettings">
+      <summary>
+             获取 System.Configuration.AppSettingsSection 的信息，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHAppSettings.Get``1(System.String)">
+      <summary>
+               获取 AppSettings 中的指定键关联的值，异常或获取值为 null 则返回 default(Ttype)
+               </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">appSettings 中配置的键的 name 值</param>
+      <returns>返回获取的配置信息的 value 的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHAppSettings.Get``1(System.String,``0)">
+      <summary>
+                获取 AppSettings 中的指定键关联的值
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">appSettings 中配置的键的 name 值</param>
+      <param name="defaultValue">默认值，当获取为 null 或异常时返回该值</param>
+      <returns>返回获取的配置信息的 value 的值</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Configuration.JHSectionEncrypt">
+      <summary>
+             加密、解密配置文件，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.ProtectExeSection(System.String,DCSoft.Utility.ProviderType)">
+      <summary>
+                针对 EXE 程序下的配置文件，标记配置节，并进行保护（.Net 程序会自行解密），异常将直接抛出
+                </summary>
+      <param name="sectionName">配置节的名称或路径</param>
+      <param name="providerType">保护程序类型</param>
+      <returns>返回一个值，该值指示当前保存节是否成功</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.ProtectSection(System.String,System.String,DCSoft.Utility.ProviderType)">
+      <summary>
+                标记配置节，并进行保护（.Net 程序会自行解密），异常将直接抛出
+                </summary>
+      <param name="configPath">
+                配置文件路径：
+                Web 站点，则为配置文件所在目录的虚拟路径
+                Exe 程序，则为应用程序的可执行文件的路径，包括可执行文件的名称后缀。
+                </param>
+      <param name="sectionName">配置节的名称或路径</param>
+      <param name="providerType">保护程序类型</param>
+      <returns>返回一个值，该值指示当前保存节是否成功</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.ProtectWebSection(System.String,DCSoft.Utility.ProviderType)">
+      <summary>
+                针对 Web 站点根目录下的配置文件，标记配置节，并进行保护（.Net 程序会自行解密），异常将直接抛出
+                </summary>
+      <param name="sectionName">配置节的名称或路径</param>
+      <param name="providerType">保护程序类型</param>
+      <returns>返回一个值，该值指示当前保存节是否成功</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.UnProtectExeSection(System.String)">
+      <summary>
+                针对 EXE 程序下的配置文件，从关联的配置节中移除受保护的配置加密
+                </summary>
+      <param name="sectionName">配置节的名称或路径</param>
+      <returns>返回一个值，该值指示是否成功取消当前节的保护</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.UnProtectSection(System.String,System.String)">
+      <summary>
+               从关联的配置节中移除受保护的配置加密
+               </summary>
+      <param name="configPath">
+               配置文件路径：
+               Web 站点，则为配置文件所在目录的虚拟路径
+               Exe 程序，则为应用程序的可执行文件的路径，包括可执行文件的名称后缀。
+               </param>
+      <param name="sectionName">配置节的名称或路径</param>
+      <returns>返回一个值，该值指示是否成功取消当前节的保护</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSectionEncrypt.UnProtectWebSection(System.String)">
+      <summary>
+                针对 Web 站点根目录下的配置文件，从关联的配置节中移除受保护的配置加密
+                </summary>
+      <param name="sectionName">配置节的名称或路径</param>
+      <returns>返回一个值，该值指示是否成功取消当前节的保护</returns>
+      <exception cref="T:System.ArgumentNullException">sectionName is null.</exception>
+    </member>
+    <member name="T:DCSoft.Utility.Configuration.JHSections">
+      <summary>
+            处理应用程序配置节信息，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSections.Get``1(System.String,System.String)">
+      <summary>
+              检索当前应用程序默认配置的指定配置节，返回配置节中项对应键的值
+              该配置节下节点必须可转换为 System.Collections.Specialized.NameValueCollection
+              异常或获取为 null 则返回 default(Ttype)
+              </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="sectionName">配置节的路径和名称</param>
+      <param name="key">配置节中项的键</param>
+      <returns>返回键对应的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Configuration.JHSections.Get``1(System.String,System.String,``0)">
+      <summary>
+                检索当前应用程序默认配置的指定配置节，返回配置节中项对应键的值
+                该配置节下节点必须可转换为 System.Collections.Specialized.NameValueCollection
+                异常或获取为 null 则返回 defaultValue
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="sectionName">配置节的路径和名称</param>
+      <param name="key">配置节中项的键</param>
+      <param name="defaultValue">默认值，当获取为 null 或异常时将返回该值</param>
+      <returns>返回键对应的值</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Data.JHDataTable">
+      <summary>
+             针对 DataTable 的特殊处理，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHDataTable.ToDataRow``1(``0)">
+      <summary>
+               将指定对象的实体转换为包含可读属性的数据行，异常将返回 null
+               </summary>
+      <typeparam name="Tmodel">数据对象类型，必须提供无参构造函数</typeparam>
+      <param name="model">要转换的数据实体</param>
+      <returns>返回转换后的包含可读属性的数据行</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHDataTable.ToDataTable``1(System.Collections.Generic.IList{``0})">
+      <summary>
+                将对象列表转换为包含可读属性的数据表格，异常将返回 null
+                </summary>
+      <typeparam name="Tmodel">数据对象类型，必须提供无参构造函数</typeparam>
+      <param name="itemList">对象列表</param>
+      <returns>返回转换后的包含可读属性的数据表格</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHDataTable.ToList``1(System.Data.DataTable)">
+      <summary>
+                将包含对象的数据表格转换为指定的对象实体列表，异常将返回 null
+                </summary>
+      <typeparam name="Tmodel">最终要得到的转换对象类型，必须提供无参构造函数</typeparam>
+      <param name="dt">要转换的数据表格</param>
+      <returns>返回转换后的对象实体列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHDataTable.ToModel``1(System.Data.DataRow)">
+      <summary>
+               将包含对象的数据行转换为指定的对象实体，异常将返回 null
+               </summary>
+      <typeparam name="Tmodel">最终要得到的转换对象类型，必须提供无参构造函数</typeparam>
+      <param name="row">要转换的数据行</param>
+      <returns>返回转换后的对象实体</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Data.JHXML">
+      <summary>
+             针对 XML 数据的特殊处理，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToDataSet(System.String)">
+      <summary>
+               将指定的  XML 架构和数据读入 System.Data.DataSet ，异常将返回 null
+               </summary>
+      <param name="xml">XML 数据</param>
+      <returns>返回转换后的数据集</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToDataSet(System.String,System.String)">
+      <summary>
+                将指定的  XML 架构和数据读入 System.Data.DataSet ，异常将返回 null
+                </summary>
+      <param name="xml">XML 数据</param>
+      <param name="xmlSchema">XML 架构</param>
+      <returns>返回转换后的数据集</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToList``1(System.String)">
+      <summary>
+                将含对象列表信息的 XML 字符串转换为对象实体列表，异常返回 null
+                </summary>
+      <typeparam name="Tmodel">要转换的对象类型</typeparam>
+      <param name="xml">含对象列表信息的 XML 字符串</param>
+      <returns>返回转换后的对象实体列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToModel``1(System.String)">
+      <summary>
+               将含对象信息的 XML 字符串转换为对象实体，异常返回 null
+               </summary>
+      <typeparam name="Tmodel">要转换的对象类型</typeparam>
+      <param name="xml">含对象信息的 XML 字符串</param>
+      <returns>返回转换后的对象实体</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToXml(System.Data.DataSet)">
+      <summary>
+               返回存储在 System.Data.DataSet 中的数据的 XML 表示形式，异常将返回 null
+               </summary>
+      <param name="ds">数据集</param>
+      <returns>表示存储在 System.Data.DataSet 中的数据的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToXml``1(``0)">
+      <summary>
+               将对象转换为 XML 格式的字符串，异常返回 null
+               </summary>
+      <typeparam name="Tmodel">要转换的对象类型</typeparam>
+      <param name="model">要转换的对象</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToXml``1(System.Collections.Generic.IList{``0})">
+      <summary>
+              将对象列表转换为 XML 格式的字符串，异常返回 null
+              </summary>
+      <typeparam name="Tmodel">要转换的对象类型</typeparam>
+      <param name="itemList">要转换的对象列表</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Data.JHXML.ToXml(System.Data.DataSet,System.String@)">
+      <summary>
+                返回存储在 System.Data.DataSet 中的数据的 XML 表示形式，异常将返回 null
+                </summary>
+      <param name="ds">数据集</param>
+      <param name="xmlSchema">返回存储在 System.Data.DataSet 中的数据的 XML 表示形式的 XML 架构</param>
+      <returns>表示存储在 System.Data.DataSet 中的数据的字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Drawing.JHCuttingImage">
+      <summary>
+            图像切割，无法继承该类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHCuttingImage.Generate(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+                从源图像指定位置并且按照指定区域切割图像
+                </summary>
+      <param name="fileName">源图像完全限定名</param>
+      <param name="srcX">要切割的源图像部分的左上角的 x 坐标</param>
+      <param name="srcY">要切割的源图像部分的左上角的 y 坐标</param>
+      <param name="srcWidth">切割区域宽度（以像素为单位）</param>
+      <param name="srcHeight">切割区域高度（以像素为单位）</param>
+      <returns>返回切割区域图像的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHCuttingImage.Generate(System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                从源图像指定位置并且按照指定区域切割图像
+                </summary>
+      <param name="bytes">源图像二进制数组</param>
+      <param name="srcX">要切割的源图像部分的左上角的 x 坐标</param>
+      <param name="srcY">要切割的源图像部分的左上角的 y 坐标</param>
+      <param name="srcWidth">切割区域宽度（以像素为单位）</param>
+      <param name="srcHeight">切割区域高度（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>返回切割区域图像的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHCuttingImage.Generate(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                从源图像指定位置并且按照指定区域切割图像
+                </summary>
+      <param name="image">源图像</param>
+      <param name="srcX">要切割的源图像部分的左上角的 x 坐标</param>
+      <param name="srcY">要切割的源图像部分的左上角的 y 坐标</param>
+      <param name="srcWidth">切割区域宽度（以像素为单位）</param>
+      <param name="srcHeight">切割区域高度（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>返回切割区域图像的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHCuttingImage.Generate(System.IO.Stream,System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                从源图像指定位置并且按照指定区域切割图像
+                </summary>
+      <param name="stream">源图像文件流</param>
+      <param name="srcX">要切割的源图像部分的左上角的 x 坐标</param>
+      <param name="srcY">要切割的源图像部分的左上角的 y 坐标</param>
+      <param name="srcWidth">切割区域宽度（以像素为单位）</param>
+      <param name="srcHeight">切割区域高度（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>返回切割区域图像的内存流</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Drawing.JHDrawing">
+      <summary>
+            图像命名空间下的通用静态方法
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.IsVerifyImage(System.String)">
+      <summary>
+               验证图片的文件路径和后缀名是否合法
+               </summary>
+      <param name="fileName">包含源图片文件名称（含后缀名）的路径</param>
+      <returns>返回一个值，该值指示路径和后缀名是否合法</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToBuffer(System.Drawing.Image,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               图像对象转换为二进制数组
+               </summary>
+      <param name="image">图像对象</param>
+      <param name="imageFormat">图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToImage(System.IO.Stream)">
+      <summary>
+               文件流转换为图像对象
+               </summary>
+      <param name="stream">文件流</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToImage(System.String)">
+      <summary>
+               文件转换为图像对象
+               </summary>
+      <param name="fileName">文件完全限定名</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToImage(System.Byte[])">
+      <summary>
+               二进制转换为图像对象
+               </summary>
+      <param name="bytes">二进制数据</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToImageFormat(System.String)">
+      <summary>
+               通过文件后缀获取图像格式
+               </summary>
+      <param name="extension">文件后缀</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHDrawing.ToStream(System.Drawing.Image,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+              将图像对象转换为内存流
+              </summary>
+      <param name="image">图片对象</param>
+      <param name="imageFormat">图像格式</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Drawing.JHVerifyCode">
+      <summary>
+            生成中文或字母数字验证码，无法继承该类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.Generate(DCSoft.Utility.Drawing.VerifyCodeAttribute,System.String@)">
+      <summary>
+                生成验证码图像（字母和数字验证码）
+                </summary>
+      <param name="attribute">验证码相关属性对象</param>
+      <param name="checkCode">验证码图像对应的验证字符串</param>
+      <returns>验证码图像对应的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.Generate(System.Int32,System.String@)">
+      <summary>
+                生成验证码图像（字母和数字验证码），除验证码位数其他验证码属性使用默认值
+                </summary>
+      <param name="codeNum">验证码位数</param>
+      <param name="checkCode">验证码图像对应的验证字符串</param>
+      <returns>验证码图像对应的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.Generate(DCSoft.Utility.Drawing.VerifyCodeAttribute,DCSoft.Utility.VerifyCodeModel,System.String@)">
+      <summary>
+                生成验证码图像
+                </summary>
+      <param name="attribute">验证码相关属性对象</param>
+      <param name="model">验证码模式</param>
+      <param name="checkCode">验证码图像对应的验证字符串</param>
+      <returns>验证码图像对应的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.Generate(System.Int32,DCSoft.Utility.VerifyCodeModel,System.String@)">
+      <summary>
+               生成验证码图像，除验证码位数其他验证码属性使用默认值
+               </summary>
+      <param name="codeNum">验证码位数</param>
+      <param name="model">验证码模式</param>
+      <param name="checkCode">验证码图像对应的验证字符串</param>
+      <returns>验证码图像对应的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.GetAlphanumericCode(System.Int32)">
+      <summary>
+               随机生成指定位数的数字和字母混合验证码，字母已转换为大写格式
+               </summary>
+      <param name="codeNum">生成验证码的位数</param>
+      <returns>返回指定位数的验证码字符串，字母已转换为大写格式</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHVerifyCode.GetChineseCode(System.Int32)">
+      <summary>
+                随机生成指定位数的汉字验证码
+                </summary>
+      <param name="codeNum">生成验证码的位数</param>
+      <returns>返回指定位数的验证汉字字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Drawing.JHZoomImage">
+      <summary>
+            缩放图片，无法继承该类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.Generate(System.String,System.Int32,System.Int32)">
+      <summary>
+                按照给定的宽、高生成缩放图
+                </summary>
+      <param name="fileName">图像文件完全限定名</param>
+      <param name="w">缩放图的宽（以像素为单位）</param>
+      <param name="h">缩放图的高（以像素为单位）</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.Generate(System.Byte[],System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               按照给定的宽、高生成缩放图
+               </summary>
+      <param name="bytes">二进制数组</param>
+      <param name="w">缩放图的宽（以像素为单位）</param>
+      <param name="h">缩放图的高（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.Generate(System.Drawing.Image,System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               按照给定的宽、高生成缩放图
+               </summary>
+      <param name="image">源图像</param>
+      <param name="w">缩放图的宽（以像素为单位）</param>
+      <param name="h">缩放图的高（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.Generate(System.IO.Stream,System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                按照给定的宽、高生成缩放图
+                </summary>
+      <param name="stream">源图像文件流</param>
+      <param name="w">缩放图的宽（以像素为单位）</param>
+      <param name="h">缩放图的高（以像素为单位）</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByBorder(System.String,System.Double,System.Double)">
+      <summary>
+                根据指定容器边框生成缩放图，将按效果优先原则
+                </summary>
+      <param name="fileName">图片文件全路径</param>
+      <param name="borderWidth">容器宽度（以像素为单位）</param>
+      <param name="borderHeight">容器高度（以像素为单位）</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByBorder(System.String,System.Double,System.Double,System.Boolean)">
+      <summary>
+               根据指定容器边框生成缩放图
+               </summary>
+      <param name="fileName">图片文件完全限定名</param>
+      <param name="borderWidth">容器宽度（以像素为单位）</param>
+      <param name="borderHeight">容器高度（以像素为单位）</param>
+      <param name="isEffectPriority">是否效果优先，True：按照源图像宽高比例缩放，可能无法完全填充容器；False：100% 填充容器，图像可能会变形</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByBorder(System.Byte[],System.Double,System.Double,System.Boolean,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               根据指定容器边框生成缩放图
+               </summary>
+      <param name="bytes">二进制数组</param>
+      <param name="borderWidth">容器宽度（以像素为单位）</param>
+      <param name="borderHeight">容器高度（以像素为单位）</param>
+      <param name="isEffectPriority">是否效果优先，True：按照源图像宽高比例缩放，可能无法完全填充容器；False：100% 填充容器，图像可能会变形</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByBorder(System.Drawing.Image,System.Double,System.Double,System.Boolean,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                根据指定容器边框生成缩放图
+                </summary>
+      <param name="image">源图像</param>
+      <param name="borderWidth">容器宽度（以像素为单位）</param>
+      <param name="borderHeight">容器高度（以像素为单位）</param>
+      <param name="isEffectPriority">是否效果优先，True：按照源图像宽高比例缩放，可能无法完全填充容器；False：100% 填充容器，图像可能会变形</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByBorder(System.IO.Stream,System.Double,System.Double,System.Boolean,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               根据指定容器边框生成缩放图
+               </summary>
+      <param name="stream">源图像文件流</param>
+      <param name="borderWidth">容器宽度（以像素为单位）</param>
+      <param name="borderHeight">容器高度（以像素为单位）</param>
+      <param name="isEffectPriority">是否效果优先，True：按照源图像宽高比例缩放，可能无法完全填充容器；False：100% 填充容器，图像可能会变形</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByRatio(System.String,System.Double)">
+      <summary>
+                根据指定的缩放比例生成缩放图
+                </summary>
+      <param name="fileName">图片文件完全限定名</param>
+      <param name="zoomRatio">缩放比例</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByRatio(System.Byte[],System.Double,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                根据指定的缩放比例生成缩放图
+                </summary>
+      <param name="bytes">二进制数组</param>
+      <param name="zoomRatio">缩放比例</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByRatio(System.Drawing.Image,System.Double,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+               根据指定的缩放比例生成缩放图
+               </summary>
+      <param name="image">图像对象</param>
+      <param name="zoomRatio">缩放比例</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.JHZoomImage.GenerateByRatio(System.IO.Stream,System.Double,System.Drawing.Imaging.ImageFormat)">
+      <summary>
+                根据指定的缩放比例生成缩放图
+                </summary>
+      <param name="stream">图像文件流</param>
+      <param name="zoomRatio">缩放比例</param>
+      <param name="imageFormat">要生成的图像类型</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Drawing.VerifyCodeAttribute">
+      <summary>
+             验证码的相关属性，无法继承该类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.VerifyCodeAttribute.#ctor">
+      <summary>
+            默认构造函数
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Drawing.VerifyCodeAttribute.#ctor(System.Int32)">
+      <summary>
+               构造函数
+               </summary>
+      <param name="codeNum">验证码数量</param>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.BgColor">
+      <summary>
+            提供一组图像背景色，随机选择其中的一种，默认值 Color.White
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.BgNoiseLineColor">
+      <summary>
+             背景噪音线的颜色 System.Drawing.Color 结构。
+                默认值 Color.LightBlue（淡蓝色）
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.BgNoiseLineNum">
+      <summary>
+            背景噪音线的数量，默认值 10
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.CodeNum">
+      <summary>
+              验证码位数，默认值 4
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.FgNoisePointNum">
+      <summary>
+            前景噪音点的数量，默认值 120
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.FontEndColor">
+      <summary>
+            表示字体渐变结束色的 System.Drawing.Color 结构。
+               默认值 Color.DarkCyan（暗青色）
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.FontName">
+      <summary>
+            字体名称，默认值 宋体
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.FontSize">
+      <summary>
+            字体的全身大小（采用 unit 参数指定的单位）。默认值 18
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.FontStartColor">
+      <summary>
+            表示字体渐变起始色的 System.Drawing.Color 结构。
+               默认值 Color.DarkCyan（暗青色）
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.HasDrawBgNoiseLine">
+      <summary>
+            是否画背景噪音线，默认值 false
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.HasDrawFgNoisePoint">
+      <summary>
+             是否画前景噪音点（颜色随机生成），默认值 true
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.IsRandomBgLineColor">
+      <summary>
+             是否随机生成背景噪音线的颜色，默认值 true
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Drawing.VerifyCodeAttribute.Style">
+      <summary>
+            字体的 System.Drawing.FontStyle，默认值 FontStyle.Bold
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Handle.BaseHandler">
+      <summary>
+            ashx处理基类 实现IHttpHandler, IRequiresSessionState接口
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Handle.BaseHandler.BeforeDelegate">
+      <summary>
+             执行ProcessRequest前执行的委托  true继续执行，false则终止返回
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.ProcessRequest(System.Web.HttpContext)">
+      <summary>
+            请求处理
+            </summary>
+      <param name="context">
+      </param>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.SubProcessRequest(System.Web.HttpContext)">
+      <summary>
+            虚函数，需要子类自行实现
+            </summary>
+      <param name="context">
+      </param>
+    </member>
+    <member name="P:DCSoft.Utility.Handle.BaseHandler.IsReusable">
+      <summary>
+            设置IsReusable为true的时候，一定要保证线程安全，并且不依赖Request项，当然也不应该有成员变量，因为成员变量在同一个实例下是随意可用的
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.TryParseBool(System.String)">
+      <summary>
+            字符转bool
+            </summary>
+      <param name="str">字符串</param>
+      <returns>转换后的bool值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.TryParseInt(System.String)">
+      <summary>
+            int类型转换
+            </summary>
+      <param name="str">要转换的字符串</param>
+      <returns>整数</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.TryParseDouble(System.String)">
+      <summary>
+            Double类型转换
+            </summary>
+      <param name="str">要转换的字符串</param>
+      <returns>double值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.TryParseDateTime(System.String)">
+      <summary>
+            时间格式转换
+            </summary>
+      <param name="str">要转换的字符串</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Handle.BaseHandler.TryParseDecimal(System.String)">
+      <summary>
+            Decimal类型转换
+            </summary>
+      <param name="str">要转换的字符串</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Handle.ProcessRequestBeforeDelegate">
+      <summary>
+            执行ProcessRequest前执行的委托
+            </summary>
+      <param name="context">当前的httpcontext对象</param>
+      <returns>返回true继续执行，false则终止返回</returns>
+    </member>
+    <member name="T:DCSoft.Utility.IO.JHFile">
+      <summary>
+            操作文件，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.GetFileByteSize(System.String)">
+      <summary>
+                获取当前文件大小（字节）
+                </summary>
+      <param name="fileName">文件的完全限定名或相对文件名</param>
+      <returns>返回当前文件字节大小</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.GetFileUnitSize(System.Int64)">
+      <summary>
+               获取指定文件大小的单位表示形式
+               </summary>
+      <param name="length">文件大小（字节）</param>
+      <returns>返回当前文件大小的单位显示</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.GetFileUnitSize(System.String)">
+      <summary>
+                获取当前文件大小的单位表示形式
+                </summary>
+      <param name="fileName">文件的完全限定名或相对文件名</param>
+      <returns>返回当前文件大小的单位显示</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.ReadBuffer(System.String)">
+      <summary>
+                用 UTF-8 格式的编码，从当前流读取字节序列，文件不存在或异常返回 null
+                </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <returns>返回当前流读取字节序列</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.ReadBuffer(System.String,System.Text.Encoding)">
+      <summary>
+               用指定的字符编码，从当前流读取字节序列，文件不存在或异常返回 null
+               </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="encoding">要使用的字符编码</param>
+      <returns>返回当前流读取字节序列</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.ReadText(System.String)">
+      <summary>
+                用 UTF-8 格式的编码，从文件中读取字符串形式的流，文件不存在或异常返回 string.Empty
+                </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <returns>返回字符串形式的流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.ReadText(System.String,System.Text.Encoding)">
+      <summary>
+               用指定的字符编码，从文件中读取字符串形式的流，文件不存在或异常返回 string.Empty
+               </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="encoding">要使用的字符编码</param>
+      <returns>返回字符串形式的流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.WriterBuffer(System.String,System.Byte[],System.Boolean)">
+      <summary>
+               用 UTF-8 格式的编码，向文件中写字节序列
+               </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="buffer">要写入的内容</param>
+      <param name="append">确定是否将数据追加到文件。如果该文件存在，并且 append 为 false，则该文件被覆盖。如果该文件存在，并且 append 为 true，则数据被追加到该文件中。否则，将创建新文件。</param>
+      <returns>返回一个值，该值指示当前写入是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.WriterBuffer(System.String,System.Byte[],System.Text.Encoding,System.Boolean)">
+      <summary>
+                用指定的字符编码，向文件中写字节序列
+                </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="buffer">要写入的内容</param>
+      <param name="encoding">要使用的字符编码</param>
+      <param name="append">确定是否将数据追加到文件。如果该文件存在，并且 append 为 false，则该文件被覆盖。如果该文件存在，并且 append 为 true，则数据被追加到该文件中。否则，将创建新文件。</param>
+      <returns>返回一个值，该值指示当前写入是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.WriterText(System.String,System.String,System.Boolean)">
+      <summary>
+               用 UTF-8 格式的编码，向文件中写字符串
+               </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="text">要写入的内容</param>
+      <param name="append">确定是否将数据追加到文件。如果该文件存在，并且 append 为 false，则该文件被覆盖。如果该文件存在，并且 append 为 true，则数据被追加到该文件中。否则，将创建新文件。</param>
+      <returns>返回一个值，该值指示当前写入是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHFile.WriterText(System.String,System.String,System.Text.Encoding,System.Boolean)">
+      <summary>
+               用指定的字符编码，向文件中写字符串
+               </summary>
+      <param name="filePath">要读取的完整文件路径</param>
+      <param name="text">要写入的内容</param>
+      <param name="encoding">要使用的字符编码</param>
+      <param name="append">确定是否将数据追加到文件。如果该文件存在，并且 append 为 false，则该文件被覆盖。如果该文件存在，并且 append 为 true，则数据被追加到该文件中。否则，将创建新文件。</param>
+      <returns>返回一个值，该值指示当前写入是否成功</returns>
+    </member>
+    <member name="T:DCSoft.Utility.IO.JHSerialization">
+      <summary>
+             序列、反序列数据
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.ByteDeSerialize``1(System.Byte[])">
+      <summary>
+                将指定的流反序列化为对象图形，如果反序列化后值为 null，则返回 default(Ttype)，异常将直接抛出
+                </summary>
+      <typeparam name="Ttype">最终要得到的数据类型</typeparam>
+      <param name="buffer">要从其中反序列化对象图形的字节数组</param>
+      <returns>返回反序列化后的指定类型的数据对象</returns>
+      <exception cref="T:System.ArgumentNullException">serializationStream 为 null</exception>
+      <exception cref="T:System.Runtime.Serialization.SerializationException">serializationStream 支持查找，但其长度为 0</exception>
+      <exception cref="T:System.Security.SecurityException">调用方没有所要求的权限</exception>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.ByteSerialize(System.Object)">
+      <summary>
+                将对象或具有指定顶级（根）的对象图形序列化为字节数组，异常将直接抛出
+                </summary>
+      <param name="graph">位于要序列化图形的根位置的对象</param>
+      <returns>返回序列化后的字节数组</returns>
+      <exception cref="T:System.ArgumentNullException">serializationStream 为 null</exception>
+      <exception cref="T:System.Runtime.Serialization.SerializationException">序列化期间发生错误，如 graph 参数中的某个对象未标记为可序列化</exception>
+      <exception cref="T:System.Security.SecurityException">调用方没有所要求的权限</exception>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.XmlDeSerialize``1(System.String)">
+      <summary>
+                使用 UTF-8 编码格式，将 XML 格式的字符串反序列化为指定类型的数据，如果反序列化后值为 null，则返回 default(Ttype)，异常直接抛出
+                </summary>
+      <typeparam name="Ttype">最终要得到的数据类型</typeparam>
+      <param name="xml">XML 格式的字符串</param>
+      <returns>返回反序列化后的指定类型的数据对象</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.XmlDeSerialize``1(System.String,System.Text.Encoding)">
+      <summary>
+                使用指定的编码格式，将 XML 格式的字符串反序列化为指定类型的数据，如果反序列化后值为 null，则返回 default(Ttype)，异常直接抛出
+                </summary>
+      <typeparam name="Ttype">最终要得到的数据类型</typeparam>
+      <param name="xml">XML 格式的字符串</param>
+      <param name="encoding">要使用的编码格式</param>
+      <returns>返回反序列化后的指定类型的数据对象</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.XmlSerialize(System.Object)">
+      <summary>
+                使用 UTF-8 编码格式，将数据对象序列化为 XML 数据格式，异常直接抛出
+                </summary>
+      <param name="data">要序列化的数据对象</param>
+      <returns>返回序列化的后的 XML 格式数据</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHSerialization.XmlSerialize(System.Object,System.Text.Encoding)">
+      <summary>
+                使用指定的编码格式，将数据对象序列化为 XML 数据格式，异常直接抛出
+                </summary>
+      <param name="data">要序列化的数据对象</param>
+      <param name="encoding">要使用的字符编码</param>
+      <returns>返回序列化的后的 XML 格式数据</returns>
+    </member>
+    <member name="T:DCSoft.Utility.IO.JHStream">
+      <summary>
+            提供对内存流的处理方法，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToBuffer(System.IO.Stream)">
+      <summary>
+                将内存流转换为字节数组，异常直接抛出
+                </summary>
+      <param name="stream">内存流</param>
+      <returns>返回对应的字节数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToBuffer(System.String)">
+      <summary>
+               将指定文件转换为字节数组，异常直接抛出
+               </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <returns>返回对应的字节数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToFile(System.String,System.IO.Stream)">
+      <summary>
+               使用 UTF-8 编码格式，将流写入到指定的文件，如果文件存在，则会被覆盖，异常直接抛出
+               </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <param name="stream">流内容</param>
+      <returns>返回一个值，该值指示当前写入文件是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToFile(System.String,System.Byte[])">
+      <summary>
+                使用 UTF-8 编码格式，将字节序列写入到指定的文件，如果文件存在，则会被覆盖，异常直接抛出
+                </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <param name="buffer">字节序列</param>
+      <returns>返回一个值，该值指示当前写入文件是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToFile(System.String,System.IO.Stream,System.Text.Encoding)">
+      <summary>
+               使用指定的编码格式，将流写入到指定的文件，如果文件存在，则会被覆盖，异常直接抛出
+               </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <param name="stream">流内容</param>
+      <param name="encoding">编码格式</param>
+      <returns>返回一个值，该值指示当前写入文件是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToFile(System.String,System.Byte[],System.Text.Encoding)">
+      <summary>
+                使用指定的编码格式，将字节序列写入到指定的文件，如果文件存在，则会被覆盖，异常直接抛出
+                </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <param name="buffer">字节序列</param>
+      <param name="encoding">编码格式</param>
+      <returns>返回一个值，该值指示当前写入文件是否成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToStream(System.Byte[])">
+      <summary>
+                字节数组转换为内存流，异常直接抛出
+                </summary>
+      <param name="buffer">字节数组</param>
+      <returns>返回字节数组对应的内存流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.IO.JHStream.ToStream(System.String)">
+      <summary>
+               将指定的文件转换为内存流，文件不存在则返回 null，异常直接抛出
+               </summary>
+      <param name="fileName">文件的完全限定名</param>
+      <returns>返回当前文件对应的内存流</returns>
+    </member>
+    <member name="T:DCSoft.Utility.JHConst">
+      <summary>
+            程序集中使用的常量信息，该类为密封类
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.ImageExtensions">
+      <summary>
+            有效的图片文件后缀名：.jpe|.jpeg|.jpg|.ico|.gif|.bmp|.emf|.exif|.tiff|.tif|.png
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternDate">
+      <summary>
+            用于验证是否为正确的日期格式
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternDBC2">
+      <summary>
+             用于验证是否包含半角字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternDouble">
+      <summary>
+            用于验证是否是一个浮点类型，可带正负号(+ -0.123)
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternEmail">
+      <summary>
+            用于验证是否是一个正确的 Email 地址(hjb@163.com)
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternHTML">
+      <summary>
+            用于验证是否包含 HTML 和空格字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternInt">
+      <summary>
+             用于验证是否是一个整数类型，可带正负号(+ -123)
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternSBC2">
+      <summary>
+            用于验证是否包含汉字或全角字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternUDouble">
+      <summary>
+            用于验证是否是一个正的浮点类型(0.123)
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.JHConst.PatternUInt">
+      <summary>
+            用于验证是否是一个正整数类型(123)
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.JHConst.DoubleToStr(System.Double,System.Int32)">
+      <summary>
+                将浮点数转换为指定位数的字符串格式
+                </summary>
+      <param name="value">要转换的值</param>
+      <param name="num">需要保留的小数位数</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.JHConst.GetRealType(System.Type)">
+      <summary>
+                 返回当前类型的真实类型（如可空类型，则返回它的基本类型）
+                 </summary>
+      <param name="type">要检查的类型</param>
+      <returns>返回对应的基本类型参数</returns>
+    </member>
+    <member name="M:DCSoft.Utility.JHConst.IsNullOrDBNull(System.Object)">
+      <summary>
+              判断当前对象是否为 null 或者 DBNull 的值
+              </summary>
+      <param name="obj">要检测的对象</param>
+      <returns>返回一个值，该值指示当前对象是否为 null 或者 DBNull 的值</returns>
+    </member>
+    <member name="T:DCSoft.Utility.JHDateTime">
+      <summary>
+            针对 DateTime 数据的特殊处理，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.JHDateTime.GetChineseWeek(System.DateTime)">
+      <summary>
+               获取当前日期是星期几
+               </summary>
+      <param name="datetime">公历(阳历)日期</param>
+      <returns>返回表示星期几</returns>
+    </member>
+    <member name="M:DCSoft.Utility.JHDateTime.GetChineseZodiac(System.DateTime)">
+      <summary>
+               根据公历(阳历)日期，获取该年份对应的十二生肖
+               </summary>
+      <param name="datetime">公历(阳历)日期</param>
+      <returns>返回对应的十二生肖</returns>
+    </member>
+    <member name="M:DCSoft.Utility.JHDateTime.GetLunisolarCalendar(System.DateTime)">
+      <summary>
+               根据公历(阳历)获取农历日期
+               </summary>
+      <param name="datetime">公历(阳历)日期</param>
+      <returns>返回对应的农历表示形式</returns>
+    </member>
+    <member name="T:DCSoft.Utility.JHLogger">
+      <summary>
+             记录日志的通用方法，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.JHLogger.Writer(System.String,System.Exception)">
+      <summary>
+                向指定的根目录下写入日志文件
+                文件存放方式：日志根目录/当前年份/当前年份-当前月份/当前年-月-日.txt
+                示例：F:\Logger\2012\2012-02\2012-02-15.txt
+                </summary>
+      <param name="baseDirectoryPath">日志根目录</param>
+      <param name="exception">异常对象</param>
+    </member>
+    <member name="M:DCSoft.Utility.JHLogger.Writer(System.String,System.String)">
+      <summary>
+                向指定的根目录下写入日志文件
+                文件存放方式：日志根目录/当前年份/当前年份-当前月份/当前年-月-日.txt
+                示例：F:\Logger\2012\2012-02\2012-02-15.txt
+                </summary>
+      <param name="baseDirectoryPath">日志根目录</param>
+      <param name="message">日志内容</param>
+    </member>
+    <member name="M:DCSoft.Utility.JHLogger.WriterExecute(System.Exception)">
+      <summary>
+               针对 Exe 程序写入日志，日志存放在 Exe 程序启动目录下的 Logger 文件夹下
+               文件存放方式：Exe 根目录/Logger/当前年份/当前年份-当前月份/当前年-月-日.txt
+               示例：F:\Exe程序\Logger\2012\2012-02\2012-02-15.txt
+               </summary>
+      <param name="exception">异常对象</param>
+    </member>
+    <member name="M:DCSoft.Utility.JHLogger.WriterExecute(System.String)">
+      <summary>
+               针对 Exe 程序写入日志，日志存放在 Exe 程序启动目录下的 Logger 文件夹下
+               文件存放方式：Exe 根目录/Logger/当前年份/当前年份-当前月份/当前年-月-日.txt
+               示例：F:\Exe程序\Logger\2012\2012-02\2012-02-15.txt
+               </summary>
+      <param name="message">日志内容</param>
+    </member>
+    <member name="T:DCSoft.Utility.Net.IpLocationItem">
+      <summary>
+            IP 地址分析结果结构体
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Net.IpLocationItem.IpStart">
+      <summary>
+             IP 开始地址段
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Net.IpLocationItem.IpEnd">
+      <summary>
+            IP 结束地址段
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Net.IpLocationItem.Country">
+      <summary>
+            IP 所在国家
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Net.IpLocationItem.City">
+      <summary>
+            IP 所在城市
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Net.IpLocationItem.#ctor(System.String,System.String)">
+      <summary>
+               结构初始化
+               </summary>
+      <param name="country">国家</param>
+      <param name="city">城市</param>
+    </member>
+    <member name="T:DCSoft.Utility.Net.IPNetworking">
+      <summary>
+            IP处理类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Net.IPNetworking.GetClientIPv4">
+      <summary>
+            取得客戶端主機 IPv4 位址
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Net.IPNetworking.GetClientIP">
+      <summary>
+            取得客戶端主機位址
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Net.JHFtpClient">
+      <summary>
+            发出对统一资源标识符 (URI) 的请求，提供对 System.Net.FtpWebRequest 的帮助实现，该类为密封类
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Net.JHIpConv">
+      <summary>
+            IP 地址转换处理，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Net.JHIpConv.GetIpLocationItem(System.String)">
+      <summary>
+               分析并获取 IP 地址分析结果结构体
+               </summary>
+      <param name="ipString">IP4 字符串格式</param>
+      <returns>返回该 IP 所在的城市、地区信息</returns>
+    </member>
+    <member name="P:DCSoft.Utility.Net.JHIpConv.FilePath">
+      <summary>
+                对应的 IP 地址文件 CoralWry.dat 的完整路径
+                </summary>
+      <remarks>如果不指定该路径，默认在站点根目录下的 Settings 文件夹下查找</remarks>
+    </member>
+    <member name="T:DCSoft.Utility.Net.JHWebClient">
+      <summary>
+                 发出对统一资源标识符 (URI) 的请求，提供对 System.Net.HttpWebRequest 的帮助实现，该类为密封类
+                 </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Net.JHWebClient.DataAcquisition(System.String)">
+      <summary>
+                使用系统的当前 ANSI 代码页的编码，采集指定 url 页面的 HTML 源码
+                </summary>
+      <param name="url">网页地址</param>
+      <returns>返回从指定网页中采集到的数据</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Net.JHWebClient.DataAcquisition(System.String,System.Text.Encoding)">
+      <summary>
+                使用指定的编码方式，采集指定 url 页面的 HTML 源码
+                </summary>
+      <param name="url">网页地址</param>
+      <param name="encoding">编码方式</param>
+      <returns>返回从指定网页中采集到的数据</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Net.JHWebClient.GetDataByUrl(System.String)">
+      <summary>
+               从指定的 url 中获取文件数据流
+               </summary>
+      <param name="url">获取文件流的 Web 地址</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Net.JHWebClient.IsExistsHttpFile(System.String)">
+      <summary>
+                判断指定的 HTTP 地址的文件是否存在
+                </summary>
+      <param name="httpPath">http 文件地址</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.ProviderType">
+      <summary>
+            加/解密配置文件的提供程序类型
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.ProviderType.RSAProvider">
+      <summary>
+            使用 RSA 加密算法来加密和解密数据。
+               RSA 算法既可用于公钥加密，也可用于数字签名。
+               它还称为“公共密钥”或非对称加密，因为它使用两个不同的密钥。
+               ASP.NET 在处理配置文件时解密该文件。ASP.NET 应用程序的标识必须对用于加密和解密各加密节的加密密钥具有读取权限。
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.ProviderType.DPAPIProvider">
+      <summary>
+            使用 Windows Data Protection API (DPAPI) 来加密配置节。
+              它使用 Windows 内置加密服务，并可为计算机特定或用户帐户特定保护进行配置。
+              对于同一服务器上需要共享信息的多个应用程序来说，计算机特定保护非常有用。
+              用户帐户特定保护可与以特定用户标识运行的服务（如共享宿主环境）一起使用。
+              每个应用程序以单独的标识运行，这样就限制了对文件和数据库等资源的访问。
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Reflection.JHProperty">
+      <summary>
+            帮助处理属性（Property）的属性（Attribute）信息，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Reflection.JHProperty.GetDataTableSchema(System.Reflection.PropertyInfo[])">
+      <summary>
+                通过属性 (Property) 的属性 (Attribute) 列表，创建对应的表格框架
+                </summary>
+      <param name="infos">属性 (Property) 的属性 (Attribute) 列表</param>
+      <returns>返回包含只读属性的表格框架</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Reflection.JHProperty.GetValue(System.Object,System.Reflection.PropertyInfo)">
+      <summary>
+                获取指定对象属性 (Property) 的值，如果该属性不存在或不可读则返回 null
+                </summary>
+      <param name="obj">要获取其属性 (Property) 值的对象</param>
+      <param name="info">属性 (Property) 的属性 (Attribute) </param>
+      <returns>返回该对象对应的属性的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Reflection.JHProperty.GetValue(System.Object,System.String)">
+      <summary>
+               获取指定对象指定属性 (Property) 名的值，如果该属性不存在或不可读则返回 null
+               </summary>
+      <param name="obj">要获取其属性 (Property) 值的对象</param>
+      <param name="propertyName">属性 (Property) 名，区分大小写</param>
+      <returns>返回该对象对应的属性的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Reflection.JHProperty.SetValue(System.Object,System.Reflection.PropertyInfo,System.Object)">
+      <summary>
+                设置指定对象属性 (Property) 的值，如果该属性不存在或不可写，或者设置的值无效，则返回
+                </summary>
+      <param name="obj">将设置其属性 (Property) 值的对象</param>
+      <param name="info">属性 (Property) 的属性 (Attribute) </param>
+      <param name="value">此属性的新值</param>
+    </member>
+    <member name="M:DCSoft.Utility.Reflection.JHProperty.SetValue(System.Object,System.String,System.Object)">
+      <summary>
+               设置指定对象指定属性 (Property) 名的值，如果该属性不存在或不可写，或者设置的值无效，则返回
+               </summary>
+      <param name="obj">将设置其属性 (Property) 值的对象</param>
+      <param name="propertyName">属性 (Property) 的名称，区分大小写</param>
+      <param name="value">此属性的新值</param>
+    </member>
+    <member name="T:DCSoft.Utility.Security.JHAesEncrypt">
+      <summary>
+             AES加密解密，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Security.JHAesEncrypt.Decode(System.String,System.String,System.String)">
+      <summary>AES解密</summary>
+      <param name="text">密文</param>
+      <param name="aesIv">AES 初始化向量</param>
+      <param name="aesKey">AES密钥</param>
+      <returns>明文</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Security.JHAesEncrypt.Encode(System.String,System.String,System.String)">
+      <summary>AES加密</summary>
+      <param name="text">加密内容</param>
+      <param name="aesIv">AES 初始化向量</param>
+      <param name="aesKey">AES密钥</param>
+      <returns>密文</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Security.JHBase64">
+      <summary>
+            Base64编码、解码，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Security.JHBase64.Decode(System.String)">
+      <summary>
+                Base64解码，采用utf8编码方式
+                </summary>
+      <param name="code">待解码的密文</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Security.JHBase64.Encode(System.String)">
+      <summary>
+                Base64编码，采用utf8编码方式
+                </summary>
+      <param name="source">待编码的明文</param>
+      <returns>编码后的字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.ServiceModel.JHWcfProxy">
+      <summary>
+            WCF代理类辅助类，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.ServiceModel.JHWcfProxy.Invoke``1(``0,System.Action{``0})">
+      <summary>
+               执行 Wcf 代理类方法
+               </summary>
+      <typeparam name="TContractClient">继承 ICommunicationObject 的类型</typeparam>
+      <param name="client">客户端处理程序</param>
+      <param name="action">封装一个方法，该方法只有一个参数并且无返回值</param>
+    </member>
+    <member name="M:DCSoft.Utility.ServiceModel.JHWcfProxy.Invoke``2(``0,System.Func{``0,``1})">
+      <summary>
+               执行 Wcf 代理类方法，并返回执行结果
+               </summary>
+      <typeparam name="TContractClient">继承 ICommunicationObject 的类型</typeparam>
+      <typeparam name="TReturn">Object 类型</typeparam>
+      <param name="client">代理类</param>
+      <param name="func">封装一个具有一个参数并返回 TResult 参数指定的类型值的方法。</param>
+      <returns>TResult 类型的结果</returns>
+    </member>
+    <member name="T:DCSoft.Utility.STStrConvType">
+      <summary>
+            字符串转换类型
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.SBC2">
+      <summary>
+            将字符串中的半角字符转换为全角字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.DBC2">
+      <summary>
+             将字符串中的全角字符转换为半角字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.TitleCase">
+      <summary>
+            将字符串中每个单词的首字母转换为大写
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.SimplifiedChinese">
+      <summary>
+            将字符串转换为简体中文字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.TraditionalChinese">
+      <summary>
+            将字符串转换为繁体中文字符
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.STStrConvType.UnChanged">
+      <summary>
+            不进行转换，原样输出
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Text.JHStrConv">
+      <summary>
+            处理字符串的转换，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.Convert(System.String,DCSoft.Utility.STStrConvType)">
+      <summary>
+                转换中文字符串的形式
+                </summary>
+      <param name="value">待转换的字符串</param>
+      <param name="type">指定要执行的转换类型的枚举值</param>
+      <returns>返回已转换为指定形式的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToDBC2(System.String)">
+      <summary>
+                 将字符串转换成半角字符
+                 </summary>
+      <remarks>
+                 全角空格为 12288，半角空格为 32
+                 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差 65248
+                 </remarks>
+      <param name="value">要处理的字符串</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToDBC2(System.String,System.String)">
+      <summary>
+                将字符串转换成半角字符
+                </summary>
+      <remarks>
+                全角空格为 12288，半角空格为 32
+                其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差 65248
+                </remarks>
+      <param name="value">要处理的字符串</param>
+      <param name="filters">需要过滤不进行转换的字符，null 参数不启用</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToSBC2(System.String)">
+      <summary>
+               将字符全部转换为全角字符
+               </summary>
+      <remarks>
+               全角空格为 12288，半角空格为 32
+               其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差 65248
+               </remarks>
+      <param name="value">要处理的字符串</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToSBC2(System.String,System.String)">
+      <summary>
+               将字符全部转换为全角字符
+               </summary>
+      <remarks>
+               全角空格为 12288，半角空格为 32
+               其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差 65248
+               </remarks>
+      <param name="value">要处理的字符串</param>
+      <param name="filters">需要过滤不进行转换的字符，null 参数不启用</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToSBC2(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+      <summary>
+                将字符串转换为全角字符
+                </summary>
+      <remarks>
+                全角空格为 12288，半角空格为 32
+                其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差 65248
+                </remarks>
+      <param name="value">要处理的字符串</param>
+      <param name="filters">需要过滤不进行转换的字符，null 参数不启用</param>
+      <param name="hasKeepNum">是否保留数字</param>
+      <param name="hasKeepAZ">是否保留常用字母（A~Z a~z）</param>
+      <param name="hasKeepLastDot">是否保留最后一个圆点</param>
+      <returns>返回处理后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHStrConv.ToTitleCase(System.String)">
+      <summary>
+                将指定的字符串转换为词首字母大写
+                </summary>
+      <param name="value">待转换的字符串</param>
+      <returns>返回已转换为词首字母大写形式的字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Text.JHString">
+      <summary>
+             处理字符串相关，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.GetWithoutHTML(System.String)">
+      <summary>
+                返回一个字符串，该字符串已经去除 HTML 相关标记
+                </summary>
+      <param name="htmlText">待处理的字符串</param>
+      <returns>返回去除 HTML 的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.IsMatched(System.String,System.String)">
+      <summary>
+                 获取一个值，该值指示匹配是否成功
+                </summary>
+      <param name="input">待验证的字符串</param>
+      <param name="pattern">要匹配的正则表达式模式</param>
+      <returns>如果匹配成功，则为 true；否则为 false</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.ReplaceNewline(System.String)">
+      <summary>
+               去除字符串中的换行符
+               </summary>
+      <param name="source">要调整的字符串</param>
+      <returns>返回已去除换行符的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.ReplaceNewline(System.String,System.String)">
+      <summary>
+                去除字符串中的换行符
+                </summary>
+      <param name="source">要调整的字符串</param>
+      <param name="target">换行符需要替换的新字符；如果需要替换后前台JS使用，则为 \\r\\n</param>
+      <returns>返回已去除换行符的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.ReplaceRegex(System.String,System.String,System.String)">
+      <summary>
+                从输入字符串中的第一个字符开始，用替换字符串替换指定的正则表达式模式的所有匹配项。
+                </summary>
+      <param name="input">要修改的字符串</param>
+      <param name="pattern">要匹配的正则表达式模式</param>
+      <param name="replacement">替换字符串</param>
+      <returns>已修改的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.Substring(System.String,System.Int32)">
+      <summary>
+                返回指定长度的字符串，并按照半角字符占一个长度，全角字符占两个长度的原则截取
+                </summary>
+      <param name="value">待处理的字符串</param>
+      <param name="subLen">截取的长度</param>
+      <returns>返回截取的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Text.JHString.Substring(System.String,System.Int32,System.String)">
+      <summary>
+                返回指定长度的字符串，并按照半角字符占一个长度，全角字符占两个长度的原则截取
+                </summary>
+      <param name="value">待处理的字符串</param>
+      <param name="subLen">截取的长度</param>
+      <param name="appendSuffix">需要附件的字符串，如果截取后的长度小于原字符串的长度，则附加该字符串</param>
+      <returns>返回截取的字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Threading.JHTimer">
+      <summary>
+                    实现在用户定义的时间间隔引发事件的计时器
+                    </summary>
+      <remarks> 为防止 timer 函数同时执行浪费资源，同时容易产生重复数据，本版本采用单线程方法控制 </remarks>
+    </member>
+    <member name="E:DCSoft.Utility.Threading.JHTimer.TimerCallbackEvent">
+      <summary>
+            当计时器间隔已过去而且计时器处于启用状态时发生
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Threading.JHTimer.#ctor(System.Int64,System.Int64)">
+      <summary>
+               实例化
+               </summary>
+      <param name="dueTime">调用指定的回调方法之前的延迟时间量（以毫秒为单位）</param>
+      <param name="periodTime">调用指定的回调方法的周期（以毫秒为单位）</param>
+    </member>
+    <member name="M:DCSoft.Utility.Threading.JHTimer.Change(System.Int64,System.Int64)">
+      <summary>
+               更改计时器的启动时间和方法调用之间的间隔，如果计时器已被回收，则即兴重新实例化并启动一个新的计时器
+               </summary>
+      <param name="dueTime">调用指定的回调方法之前的延迟时间量（以毫秒为单位）</param>
+      <param name="periodTime">调用指定的回调方法的周期（以毫秒为单位）</param>
+    </member>
+    <member name="M:DCSoft.Utility.Threading.JHTimer.Dispose">
+      <summary>
+            释放所有占用资源
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Threading.JHTimer.Start(System.Object)">
+      <summary>
+               启动定时器
+               </summary>
+      <param name="parameter">定时器回调时需要回传的参数信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Threading.JHTimer.Stop">
+      <summary>
+            停止定时器
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.CDATA">
+      <summary>
+            XML，Cdata数据处理
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.#ctor">
+      <summary>
+            构造函数
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:DCSoft.Utility.Utils.CDATA" /> class.
+            </summary>
+      <param name="p_Value">The p_ value.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.GetSchema">
+      <summary>
+            Gets the schema.
+            </summary>
+      <returns>XmlSchema.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.op_Implicit(System.String)~DCSoft.Utility.Utils.CDATA">
+      <summary>
+            CDATA隐式转换
+            </summary>
+      <param name="text">文本</param>
+      <returns>The result of the conversion.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.op_Implicit(DCSoft.Utility.Utils.CDATA)~System.String">
+      <summary>
+            STRING隐式转换
+            </summary>
+      <param name="element">The element.</param>
+      <returns>The result of the conversion.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.ReadXml(System.Xml.XmlReader)">
+      <summary>
+            读取xml
+            </summary>
+      <param name="reader">The reader.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.ToString">
+      <summary>
+            重写tostring
+            </summary>
+      <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CDATA.WriteXml(System.Xml.XmlWriter)">
+      <summary>
+            写入xml
+            </summary>
+      <param name="writer">写入器</param>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.CDATA.Value">
+      <summary>
+            值
+            </summary>
+      <value>The value.</value>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ChinaDate">
+      <summary>
+            中文日期处理类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChinaDate.getChinaDate(System.DateTime)">
+      <summary>
+            Gets the china date.
+            </summary>
+      <param name="dt">The dt.</param>
+      <returns>CNDate.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChinaDate.GetDaysByMonth(System.Int32,System.Int32)">
+      <summary>
+            Gets the days by month.
+            </summary>
+      <param name="y">The y.</param>
+      <param name="m">The m.</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChinaDate.GetMondayDateByDate(System.DateTime)">
+      <summary>
+            Gets the monday date by date.
+            </summary>
+      <param name="dt">The dt.</param>
+      <returns>DateTime.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChinaDate.getWeek(System.DateTime)">
+      <summary>
+            Gets the week.
+            </summary>
+      <param name="dt">The dt.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ChineseCalendar">
+      <summary>
+            中国农历
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChineseCalendar.#ctor(System.DateTime)">
+      <summary>
+            Initializes a new instance of the <see cref="T:DCSoft.Utility.Utils.ChineseCalendar" /> class.
+            </summary>
+      <param name="dt">The dt.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ChineseCalendar.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:DCSoft.Utility.Utils.ChineseCalendar" /> class.
+            </summary>
+      <param name="cy">The cy.</param>
+      <param name="cm">The cm.</param>
+      <param name="cd">The cd.</param>
+      <param name="leapMonthFlag">if set to <c>true</c> [leap month flag].</param>
+      <exception cref="T:System.Exception">
+            不合法的农历日期
+            or
+            不合法的农历日期
+            or
+            不合法的农历日期
+            </exception>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.Animal">
+      <summary>
+            Gets the animal.
+            </summary>
+      <value>The animal.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.AnimalString">
+      <summary>
+            Gets the animal string.
+            </summary>
+      <value>The animal string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseConstellation">
+      <summary>
+            Gets the chinese constellation.
+            </summary>
+      <value>The chinese constellation.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseDateString">
+      <summary>
+            Gets the chinese date string.
+            </summary>
+      <value>The chinese date string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseDay">
+      <summary>
+            Gets the chinese day.
+            </summary>
+      <value>The chinese day.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseDayString">
+      <summary>
+            Gets the chinese day string.
+            </summary>
+      <value>The chinese day string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseHour">
+      <summary>
+            Gets the chinese hour.
+            </summary>
+      <value>The chinese hour.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseMonth">
+      <summary>
+            Gets the chinese month.
+            </summary>
+      <value>The chinese month.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseMonthString">
+      <summary>
+            Gets the chinese month string.
+            </summary>
+      <value>The chinese month string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseTwentyFourDay">
+      <summary>
+            Gets the chinese twenty four day.
+            </summary>
+      <value>The chinese twenty four day.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseTwentyFourNextDay">
+      <summary>
+            Gets the chinese twenty four next day.
+            </summary>
+      <value>The chinese twenty four next day.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseTwentyFourPrevDay">
+      <summary>
+            Gets the chinese twenty four previous day.
+            </summary>
+      <value>The chinese twenty four previous day.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseYear">
+      <summary>
+            Gets the chinese year.
+            </summary>
+      <value>The chinese year.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.ChineseYearString">
+      <summary>
+            Gets the chinese year string.
+            </summary>
+      <value>The chinese year string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.Constellation">
+      <summary>
+            Gets the constellation.
+            </summary>
+      <value>The constellation.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.Date">
+      <summary>
+            Gets or sets the date.
+            </summary>
+      <value>The date.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.DateHoliday">
+      <summary>
+            Gets the date holiday.
+            </summary>
+      <value>The date holiday.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.DateString">
+      <summary>
+            Gets the date string.
+            </summary>
+      <value>The date string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.GanZhiDateString">
+      <summary>
+            Gets the gan zhi date string.
+            </summary>
+      <value>The gan zhi date string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.GanZhiDayString">
+      <summary>
+            Gets the gan zhi day string.
+            </summary>
+      <value>The gan zhi day string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.GanZhiMonthString">
+      <summary>
+            Gets the gan zhi month string.
+            </summary>
+      <value>The gan zhi month string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.GanZhiYearString">
+      <summary>
+            Gets the gan zhi year string.
+            </summary>
+      <value>The gan zhi year string.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.IsChineseLeapMonth">
+      <summary>
+            Gets a value indicating whether this instance is chinese leap month.
+            </summary>
+      <value>
+        <c>true</c> if this instance is chinese leap month; otherwise, <c>false</c>.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.IsChineseLeapYear">
+      <summary>
+            Gets a value indicating whether this instance is chinese leap year.
+            </summary>
+      <value>
+        <c>true</c> if this instance is chinese leap year; otherwise, <c>false</c>.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.IsLeapYear">
+      <summary>
+            Gets a value indicating whether this instance is leap year.
+            </summary>
+      <value>
+        <c>true</c> if this instance is leap year; otherwise, <c>false</c>.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.newCalendarHoliday">
+      <summary>
+            Gets the new calendar holiday.
+            </summary>
+      <value>The new calendar holiday.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.WeekDay">
+      <summary>
+            Gets the week day.
+            </summary>
+      <value>The week day.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.WeekDayHoliday">
+      <summary>
+            Gets the week day holiday.
+            </summary>
+      <value>The week day holiday.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ChineseCalendar.WeekDayStr">
+      <summary>
+            Gets the week day string.
+            </summary>
+      <value>The week day string.</value>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.CNDate">
+      <summary>
+            中国日期对象
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnAnm">
+      <summary>
+            The cn anm
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnFtvl">
+      <summary>
+            The cn FTVL
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnFtvs">
+      <summary>
+            The cn FTVS
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnIntDay">
+      <summary>
+            The cn int day
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnIntMonth">
+      <summary>
+            The cn int month
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnIntYear">
+      <summary>
+            The cn int year
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnSolarTerm">
+      <summary>
+            The cn solar term
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnStrDay">
+      <summary>
+            The cn string day
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnStrMonth">
+      <summary>
+            The cn string month
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.CNDate.cnStrYear">
+      <summary>
+            The cn string year
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.CSVHelper">
+      <summary>
+            CSV文件处理帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CSVHelper.DataTableToCSV(System.Data.DataTable,System.String,System.Text.Encoding)">
+      <summary>
+            Web端，将DataTable输出为csv文件
+            </summary>
+      <param name="dt">数据datatable</param>
+      <param name="fileName">文件名</param>
+      <param name="encoding">编码.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.CSVHelper.DataTableToCSV(System.Data.DataTable,System.String,System.Boolean,System.Text.Encoding)">
+      <summary>
+            将DataTable输出为csv文件，并保存
+            </summary>
+      <param name="dt">数据datatable</param>
+      <param name="filePath">文件名</param>
+      <param name="append">是否追加.</param>
+      <param name="encoding">编码.</param>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.EncryptHelper">
+      <summary>
+            加解密处理类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.Base64Decrypt(System.String)">
+      <summary>
+            base64解码
+            </summary>
+      <param name="input">解码的字符串</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.Base64Decrypt(System.String,System.Text.Encoding)">
+      <summary>
+            base64解码
+            </summary>
+      <param name="input">解码的字符串</param>
+      <param name="encode">Encoding字符编码格式</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.Base64Encrypt(System.String)">
+      <summary>
+            base64加密
+            </summary>
+      <param name="input">加密的字符串</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.Base64Encrypt(System.String,System.Text.Encoding)">
+      <summary>
+            base64加密
+            </summary>
+      <param name="input">加密的字符串</param>
+      <param name="encode">Encoding字符编码格式</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.DES3Decrypt(System.String,System.String,System.Security.Cryptography.CipherMode,System.String)">
+      <summary>
+            DES3解密，ECB模式解密，UTF8 编码
+            </summary>
+      <param name="data">需解密的字符串</param>
+      <param name="key">密钥，24位</param>
+      <param name="mode">加密模式</param>
+      <param name="iv">加密向量，8位</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.DES3Encrypt(System.String,System.String,System.Security.Cryptography.CipherMode,System.String)">
+      <summary>
+            DES3加密，ECB模式加密，UTF8 编码
+            </summary>
+      <param name="data">需加密的字符串</param>
+      <param name="key">密钥，24位</param>
+      <param name="mode">加密模式</param>
+      <param name="iv">加密向量，8位</param>
+      <returns>加码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.DESDecrypt(System.String,System.String,System.String)">
+      <summary>
+             DES解密
+            </summary>
+      <param name="data">需解密的字符串</param>
+      <param name="key">键值</param>
+      <param name="iv">IV值</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.DESEncrypt(System.String,System.String,System.String)">
+      <summary>
+            DES加密
+            </summary>
+      <param name="data">需加密的字符串</param>
+      <param name="key">键值</param>
+      <param name="iv">IV值</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.MD5Encrypt(System.IO.Stream)">
+      <summary>
+            MD5加密
+            </summary>
+      <param name="stream">字符流</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.MD5Encrypt(System.String)">
+      <summary>
+            MD5加密
+            </summary>
+      <param name="input">字符串</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.MD5Encrypt(System.String,System.Text.Encoding)">
+      <summary>
+             MD5加密
+            </summary>
+      <param name="input">字符串</param>
+      <param name="encode">Encoding字符编码格式</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.MD5Encrypt16(System.String,System.Text.Encoding)">
+      <summary>
+             MD5加密 16位
+            </summary>
+      <param name="input">字符串</param>
+      <param name="encode">Encoding字符编码格式,某人UTF-8</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.SHA1Encrypt(System.String)">
+      <summary>
+            SHA1加密
+            </summary>
+      <param name="input">字符串</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.SHA1Encrypt(System.String,System.Text.Encoding)">
+      <summary>
+            SHA1加密
+            </summary>
+      <param name="input">字符串</param>
+      <param name="encode">Encoding字符编码格式</param>
+      <returns>加密后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.AESEncrypt(System.String,System.String)">
+      <summary>
+             AES 加密
+            </summary>
+      <param name="str">待加密明文</param>
+      <param name="key">密钥（16、24、32位字符长度，对应字节长度为128，192，256位）</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.EncryptHelper.AESDecrypt(System.String,System.String)">
+      <summary>
+             AES 解密
+            </summary>
+      <param name="str">待解密密文</param>
+      <param name="key">密钥（16、24、32位字符长度，对应字节长度为128，192，256位）</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.FileHelper">
+      <summary>
+            文件帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.Read(System.String,System.Text.Encoding)">
+      <summary>
+            读文件
+            </summary>
+      <param name="path">文件路径</param>
+      <param name="encoding">编码.</param>
+      <returns>读取后的文本内容</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.Write(System.String,System.String,System.Boolean,System.Text.Encoding)">
+      <summary>
+            写文件
+            </summary>
+      <param name="path">文件路径</param>
+      <param name="data">文本字符串</param>
+      <param name="append">是否追加</param>
+      <param name="encoding">编码.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.CopyFile(System.String,System.String)">
+      <summary>  
+            将源文件的内容复制到目标文件中,如存在则覆盖  
+            </summary>
+      <param name="sourceFilePath">源文件的绝对路径</param>
+      <param name="destFilePath">目标文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.MoveFile(System.String,System.String,System.String)">
+      <summary>
+            将文件移动到指定目录,如果目标中存在同名文件,则删除已存在的文件
+            </summary>
+      <param name="srcPath">需要移动的源文件的绝对路径</param>
+      <param name="descPath">移动到的目录的绝对路径(文件夹即可，不是文件路径)</param>
+      <param name="descFileName">目标文件的文件名，默认与源文件相同</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.DeleteFile(System.String)">
+      <summary>  
+            删除指定文件  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.CreateFile(System.String)">
+      <summary>  
+            创建一个文件。  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.GetExtension(System.String)">
+      <summary>  
+            从文件的绝对路径中获取扩展名  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.GetFileName(System.String)">
+      <summary>  
+            从文件的绝对路径中获取文件名( 包含扩展名 )  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.IsExistDirectory(System.String)">
+      <summary>  
+            检测指定目录是否存在  
+            </summary>
+      <param name="directoryPath">目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.ClearDirectory(System.String)">
+      <summary>  
+            清空指定目录下所有文件及子目录,但该目录依然保存.  
+            </summary>
+      <param name="directoryPath">指定目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.GetFileNames(System.String)">
+      <summary>  
+            获取指定目录中所有文件列表  
+            </summary>
+      <param name="directoryPath">指定目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.IsEmptyDirectory(System.String)">
+      <summary>  
+            检测指定目录是否为空  
+            </summary>
+      <param name="directoryPath">指定目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.GetDirectories(System.String)">
+      <summary>  
+            获取指定目录中所有子目录列表,若要搜索嵌套的子目录列表,请使用重载方法.  
+            </summary>
+      <param name="directoryPath">指定目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.DeleteDirectory(System.String)">
+      <summary>  
+            删除指定目录及其所有子目录  
+            </summary>
+      <param name="directoryPath">指定目录的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.IsExistFile(System.String)">
+      <summary>  
+            检测指定文件是否存在,如果存在则返回true。  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.FileHelper.GetFileSize(System.String)">
+      <summary>  
+            获取一个文件的长度,单位为字节 Byte  
+            </summary>
+      <param name="filePath">文件的绝对路径</param>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.HttpHelper">
+      <summary>
+            HTTP帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.#ctor">
+      <summary>
+            构造函数
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.GetCookie(System.String)">
+      <summary>
+            获取url的cookie
+            </summary>
+      <param name="url">URL地址</param>
+      <returns>返回reaponse的“Set-Cookie”值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Get(System.String)">
+      <summary>
+            获取url内容
+            </summary>
+      <param name="url">url地址</param>
+      <returns>byte数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Get(System.String,System.String,System.String)">
+      <summary>
+            获取url内容
+            </summary>
+      <param name="server">RefererHTTP 标头的值</param>
+      <param name="url">URL地址</param>
+      <param name="cookieHeader">cookiet头</param>
+      <returns>byte数组</returns>
+      <exception cref="T:System.ArgumentNullException">server</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.GetHtmlContent(System.String)">
+      <summary>
+            获取url内容
+            </summary>
+      <param name="url">URL地址</param>
+      <returns>返回html内容</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.GetHtmlContent(System.String,System.Text.Encoding)">
+      <summary>
+            获取url内容
+            </summary>
+      <param name="url">URL地址</param>
+      <param name="encoding">字符编码</param>
+      <returns>返回html内容</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Post(System.String,System.Byte[],System.Text.Encoding)">
+      <summary>
+            post方式获取url内容
+            </summary>
+      <param name="url">url地址</param>
+      <param name="data">数据</param>
+      <param name="encoding">编码.</param>
+      <returns>返回值Byte数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Post(System.String,System.Byte[])">
+      <summary>
+            post方式获取url内容
+            </summary>
+      <param name="url">url地址</param>
+      <param name="data">数据</param>
+      <returns>返回值Byte数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Post(System.String,System.String,System.Byte[],System.String)">
+      <summary>
+            post方式获取url内容
+            </summary>
+      <param name="server">RefererHTTP 标头的值</param>
+      <param name="url">url地址</param>
+      <param name="data">数据</param>
+      <param name="cookieHeader">cookie头</param>
+      <returns>返回值Byte数组</returns>
+      <exception cref="T:System.ArgumentNullException">data
+            or
+            server</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Post(System.String,System.String,System.Byte[],System.String,System.String,System.String,System.String,System.Text.Encoding)">
+      <summary>
+            post方式获取url内容
+            </summary>
+      <param name="server">RefererHTTP 标头的值</param>
+      <param name="url">url地址</param>
+      <param name="data">数据</param>
+      <param name="cookieHeader">cookie头</param>
+      <param name="contentType">Type of the content.</param>
+      <param name="accept">The accept.</param>
+      <param name="userAgent">The user agent.</param>
+      <returns>返回值Byte数组</returns>
+      <param name="encoding">编码.</param>
+      <exception cref="T:System.ArgumentNullException">data
+            or
+            server</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.HttpHelper.Post(System.String,System.String,System.Byte[],System.String,System.String,System.String,System.String)">
+      <summary>
+            post方式获取url内容
+            </summary>
+      <param name="server">RefererHTTP 标头的值</param>
+      <param name="url">url地址</param>
+      <param name="data">数据</param>
+      <param name="cookieHeader">cookie头</param>
+      <param name="contentType">Type of the content.</param>
+      <param name="accept">The accept.</param>
+      <param name="userAgent">The user agent.</param>
+      <returns>返回值Byte数组</returns>
+      <exception cref="T:System.ArgumentNullException">data
+            or
+            server</exception>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ImageHelper">
+      <summary>
+            图片处理帮助类
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation">
+      <summary>
+            水印位置枚举常量
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_LT">
+      <summary>
+            left top
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_RT">
+      <summary>
+            right top
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_LC">
+      <summary>
+            left center
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_RC">
+      <summary>
+            right center
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_LB">
+      <summary>
+            left bottom
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_RB">
+      <summary>
+            right bottom
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_TC">
+      <summary>
+            top center
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_BC">
+      <summary>
+            bottom center
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation.LOCATION_C">
+      <summary>
+              center
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.MakeThumbnail(System.String,System.String,System.Boolean,System.String)">
+      <summary>
+            图片压缩，根据原始图片的大小进行适当缩放
+            </summary>
+      <param name="originalImagePath">原始文件路径</param>
+      <param name="thumbnailPath">压缩后的图片路径</param>
+      <param name="deleteOriginalImage">是否需要删除原始图片文件</param>
+      <param name="bakFilePath">备份原始文件的路径，不传则不进行备份</param>
+      <exception cref="T:System.Exception">
+      </exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.AddPicWatermark(System.String,System.String,DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation)">
+      <summary>
+            图片水印处理方法
+            </summary>
+      <param name="srcPicPath">需要加载水印的图片路径（绝对路径）</param>
+      <param name="waterPath">水印图片（绝对路径）</param>
+      <param name="location">水印位置,LT: 左上角;LT: 左上角;（传送正确的代码）</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.AddLetterWatermark(System.String,System.Int32,System.String,System.Drawing.Color,DCSoft.Utility.Utils.ImageHelper.WaterMarkLocation)">
+      <summary>
+            文字水印处理方法
+            </summary>
+      <param name="path">图片路径（绝对路径）</param>
+      <param name="fontSize">字体大小</param>
+      <param name="letters">水印文字</param>
+      <param name="color">颜色</param>
+      <param name="location">水印位置</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.LeftRightFlip(System.Drawing.Bitmap,System.Int32,System.Int32)">
+      <summary>
+            左右翻转
+            </summary>
+      <param name="mybm">原始图片</param>
+      <param name="width">原始图片的长度</param>
+      <param name="height">原始图片的高度</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.UpDownFlip(System.Drawing.Bitmap,System.Int32,System.Int32)">
+      <summary>
+            上下翻转
+            </summary>
+      <param name="mybm">原始图片</param>
+      <param name="width">原始图片的长度</param>
+      <param name="height">原始图片的高度</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.TransformBlackAndWhite(System.Drawing.Bitmap,System.Int32,System.Int32)">
+      <summary>
+            转换为黑白图片
+            </summary>
+      <param name="srcPic">要进行处理的图片</param>
+      <param name="width">图片的长度</param>
+      <param name="height">图片的高度</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ImageHelper.GetFrames(System.String,System.String)">
+      <summary>
+            获取图片中的各帧
+            </summary>
+      <param name="pPath">图片路径</param>
+      <param name="pSavePath">保存路径（文件夹）</param>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.JsonHelper">
+      <summary>
+            Json帮助类,依赖Newtonsoft.json.dll
+            参见：
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Object2Json(System.Object)">
+      <summary>
+            将对象转换为json
+            </summary>
+      <param name="obj">对象实例</param>
+      <returns>json字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Object2Json(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+      <summary>
+             将对象转换为json
+            </summary>
+      <param name="obj">对象实例</param>
+      <param name="settings">格式化JsonSerializerSettings参数</param>
+      <returns>json字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Json2Object``1(System.String)">
+      <summary>
+            将json转换为对象
+            </summary>
+      <typeparam name="T">对象类型</typeparam>
+      <param name="jsonStr">json字符串</param>
+      <returns>对象实体</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Json2List``1(System.String)">
+      <summary>
+            将json转换为泛型列表
+            </summary>
+      <typeparam name="T">对象类型</typeparam>
+      <param name="jsonStr">json字符串</param>
+      <returns>对象列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Json2Dictionary(System.String)">
+      <summary>
+            将json转换为字典
+            </summary>
+      <param name="json">json字符串</param>
+      <returns>字典</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.getDictionary(System.String)">
+      <summary>
+            获取字典, 过时的方法，请使用GetDictionary
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <returns>字典对象</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.GetDictionary(System.String)">
+      <summary>
+            获取字典
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <returns>字典对象</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.getObjectList(System.String)">
+      <summary>
+            获取对象列表, 过时的方法，请使用GetDictionaryList
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <returns>list对象列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.GetDictionaryList(System.String)">
+      <summary>
+            获取对象列表
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <returns>list对象列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Json2XML(System.String)">
+      <summary>
+            将json转换为xml
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <returns>xmldocument对象</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Linq2Json(System.Object,System.String)">
+      <summary>
+            将linq转换为json
+            </summary>
+      <param name="obj">对象</param>
+      <param name="key">键值</param>
+      <returns>string对象列表</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.JsonHelper.Linq2String(System.String,System.String)">
+      <summary>
+            将linq转换为字符串
+            </summary>
+      <param name="jsonStr">json字符串</param>
+      <param name="key">键值</param>
+      <returns>字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.LogHelper">
+      <summary>
+            日志帮助类, 依赖log4net.json.dll
+            参考:https://www.cnblogs.com/chenwolong/p/log4net.html
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.Dispose">
+      <summary>
+            Disponse销毁对象
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.Finalize">
+      <summary>
+            析构函数
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.LogErrorMsg(System.Exception,System.String)">
+      <summary>
+            记录错误日志信息
+            </summary>
+      <param name="ex">异常对象</param>
+      <param name="info">错误说明</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.LogErrorMsg(System.String,System.String)">
+      <summary>
+            记录错误日志信息
+            </summary>
+      <param name="info">错误内容</param>
+      <param name="methodName">方法名称</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.LogInfoMsg(System.String,System.String)">
+      <summary>
+            记录日志信息
+            </summary>
+      <param name="info">日志信息内容</param>
+      <param name="methodName">方法名称</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.DebugErrorMsg(System.Exception,System.String)">
+      <summary>
+            debug错误日志，写入错误日志文件
+            </summary>
+      <param name="ex">异常对象</param>
+      <param name="info">错误字符信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.DebugErrorMsg(System.String,System.String)">
+      <summary>
+            debug错误日志，写入错误日志文件
+            </summary>
+      <param name="info">错误内容</param>
+      <param name="methodName">方法名称</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.LogHelper.DebugInfoMsg(System.String,System.String)">
+      <summary>
+            debug记录日志，写入信息日志文件
+            </summary>
+      <param name="info">内容</param>
+      <param name="methodName">方法名称</param>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ManagementHelper">
+      <summary>
+            系统硬件相关管理帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetBaseBoardSerialNumber">
+      <summary>
+            获取主板编号
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetCpuSerialNumber">
+      <summary>
+            获得CPU序列号
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetCpuCount">
+      <summary>
+            获取CPU数目
+            </summary>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetCpuCores">
+      <summary>
+            获取CPU的内核数目
+            </summary>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetLogicalCpuCount">
+      <summary>
+            获取CPU逻辑处理器数目
+            </summary>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetCpuMHZ">
+      <summary>
+            获取CPU的频率
+            </summary>
+      <returns>System.String[].</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetDiskID">
+      <summary>
+            获取硬盘编号
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetMACString">
+      <summary>
+            获取MAC地址
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetSizeOfDisk">
+      <summary>
+            获取硬盘容量
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetSizeOfMemery">
+      <summary>
+            获取内存容量
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetUserName">
+      <summary>
+            获取当前系统的用户名
+            </summary>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ManagementHelper.GetComputerName">
+      <summary>
+            获取计算机名
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.MemoryCacheHelper">
+      <summary>
+            缓存帮助类，.NET4.0以上版本使用
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.GetCacheItem``1(System.String,System.Func{``0},System.Nullable{System.TimeSpan},System.Nullable{System.DateTime})">
+      <summary>
+            获取缓存的对象
+            </summary>
+      <typeparam name="T">对象泛型</typeparam>
+      <param name="key">对象key值.</param>
+      <param name="cachePopulate">自定义缓存方法.</param>
+      <param name="slidingExpiration">用于设置可调过期时间，表示当离最后访问超过某个时间段后就过期.</param>
+      <param name="absoluteExpiration">设置绝对过期时间，表示只要时间一到就过期.</param>
+      <returns>T.</returns>
+      <exception cref="T:System.ArgumentException">
+            Invalid cache key
+            or
+            Either a sliding expiration or absolute must be provided
+            </exception>
+      <exception cref="T:System.ArgumentNullException">cachePopulate</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.GetCache(System.String)">
+      <summary>
+            获取数据缓存
+            </summary>
+      <param name="cacheKey">键值</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.SetCache(System.String,System.Object)">
+      <summary>
+            设置数据缓存
+            </summary>
+      <param name="cacheKey">键值</param>
+      <param name="objValue">缓存的对象</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.SetCache(System.String,System.Object,System.TimeSpan)">
+      <summary>
+            设置数据缓存
+            </summary>
+      <param name="cacheKey">键值</param>
+      <param name="objValue">缓存的对象</param>
+      <param name="timeout">最后访问超过某个时间段后就过期</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.SetCache(System.String,System.Object,System.DateTime,System.TimeSpan)">
+      <summary>
+            设置数据缓存
+            </summary>
+      <param name="cacheKey">键值</param>
+      <param name="objValue">缓存的对象</param>
+      <param name="absoluteExpiration">设置绝对过期时间，表示只要时间一到就过期.</param>
+      <param name="slidingExpiration">最后访问超过某个时间段后就过期</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.UpdateCache(System.String,System.Object,System.TimeSpan)">
+      <summary>
+            更新缓存，等效于SetCache
+            </summary>
+      <param name="cacheKey">键值</param>
+      <param name="objValue">缓存的对象</param>
+      <param name="timeout">最后访问超过某个时间段后就过期</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.RemoveCache(System.String)">
+      <summary>
+            移除指定数据缓存
+            </summary>
+      <param name="cacheKey">键值</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.MemoryCacheHelper.RemoveAllCache">
+      <summary>
+            移除全部缓存
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.MinifiedNumArrayConverter">
+      <summary>
+            基于json的转换器
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.SqlBulkCopyHelper">
+      <summary>
+            SqlServer 批量操作帮助类.
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.SqlBulkCopyHelper.BatchUpdate(System.String,System.Data.DataTable)">
+      <summary>
+            批量更新操作
+            </summary>
+      <param name="connString">数据库链接字符串.</param>
+      <param name="table">数据表.</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.SqlBulkCopyHelper.BulkInsert(System.String,System.Data.DataTable,System.Int32,System.String[])">
+      <summary>
+            批量插入操作
+            </summary>
+      <param name="connectionStrings">数据库链接字符串.</param>
+      <param name="table">待插入的数据表.</param>
+      <param name="batchSize">每次批量更新的记录数.</param>
+      <param name="ignoreColumns">忽略的数据列</param>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.SqlBulkCopyHelper.ImportByTransaction(System.Data.DataTable,System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.Int32)">
+      <summary>
+            事务方式批量导入数据
+            </summary>
+      <param name="table">待导入的数据表.</param>
+      <param name="sqlcon">数据库链接.</param>
+      <param name="sqlTransaction">事务.</param>
+      <param name="batchSize">每次批量更新的记录数.</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ValidateCode">
+      <summary>
+            验证码
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ValidateCode.MaxLength">
+      <summary>
+            验证码的最大长度
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Utils.ValidateCode.MinLength">
+      <summary>
+            验证码的最小长度
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ValidateCode.GenernateValidateCode(System.Int32)">
+      <summary>
+            生成验证码
+            </summary>
+      <param name="length">指定验证码的长度</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ValidateCode.GetImageWidth(System.Int32)">
+      <summary>
+            得到验证码图片的长度
+            </summary>
+      <param name="validateNumLength">验证码的长度</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ValidateCode.GetImageHeight">
+      <summary>
+            得到验证码的高度
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ValidateCode.GenernateValidateGraphic(System.String)">
+      <summary>
+            创建验证码的图片
+            </summary>
+      <param name="validateCode">验证码图片对应的字节数组，png格式</param>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.XmlHelper">
+      <summary>
+            XML帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.GetNodeAttributeValue(System.String,System.String,System.String)">
+      <summary>
+            获取xml节点属性值
+            </summary>
+      <param name="xmlContent">xml.</param>
+      <param name="nodePath">节点路径，如 /Nodes/Node/User .</param>
+      <param name="attributeName">属性名称.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.GetNodeValue(System.String,System.String)">
+      <summary>
+            获取xml（第一个匹配）节点值（文本内容）
+            </summary>
+      <param name="xmlContent">The XML.</param>
+      <param name="nodePath">节点路径，如 /Nodes/Node/User .</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.ObjectToXml(System.Object)">
+      <summary>
+            将对象序列化为xml，请确保对象可序列化
+            </summary>
+      <param name="obj">待序列化的对象.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.ObjectToXml(System.Type,System.Object)">
+      <summary>
+            将对象序列化为xml，请确保对象可序列化
+            </summary>
+      <param name="type">序列化对象的类型.</param>
+      <param name="obj">待序列化的对象.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlSerialize(System.Object)">
+      <summary>
+            将对象序列化为xml，请确保对象可序列化
+            </summary>
+      <param name="obj">待序列化的对象.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlSerialize(System.Type,System.Object)">
+      <summary>
+            将对象序列化为xml，请确保对象可序列化
+            </summary>
+      <param name="type">序列化对象的类型.</param>
+      <param name="obj">待序列化的对象.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlSerialize(System.Object,System.Text.Encoding)">
+      <summary>
+            将对象序列化为xml，请确保对象可序列化
+            </summary>
+      <param name="obj">待序列化的对象.</param>
+      <param name="encoding">编码.</param>
+      <returns>System.String.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlDeserialize(System.Type,System.String)">
+      <summary>
+            将XML反序列化为对象，请确保对象可序列化
+            </summary>
+      <param name="type">序列化对象的类型.</param>
+      <param name="xmlContent">XML内容.</param>
+      <returns>System.Object.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlDeserialize``1(System.String)">
+      <summary>
+            将XML反序列化为对象，请确保对象可序列化
+            </summary>
+      <typeparam name="T">反序列化对象类型</typeparam>
+      <param name="xmlContent">XML内容.</param>
+      <returns>T.</returns>
+      <exception cref="T:System.ArgumentNullException">xmlContent</exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.XmlHelper.XmlDeserialize``1(System.String,System.Text.Encoding)">
+      <summary>
+            将XML反序列化为对象，请确保对象可序列化
+            </summary>
+      <typeparam name="T">反序列化对象类型</typeparam>
+      <param name="xmlContent">XML内容.</param>
+      <param name="encoding">编码.</param>
+      <returns>T.</returns>
+      <exception cref="T:System.ArgumentNullException">
+            xmlContent
+            or
+            encoding
+            </exception>
+    </member>
+    <member name="T:DCSoft.Utility.Utils.ZipHelper">
+      <summary>
+            ZIP压缩帮助类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ZipHelper.DeZip(System.String,System.String)">
+      <summary>
+            解压.
+            </summary>
+      <param name="zipname">The zipname.</param>
+      <param name="zippath">The zippath.</param>
+      <exception cref="T:System.Exception">
+      </exception>
+    </member>
+    <member name="M:DCSoft.Utility.Utils.ZipHelper.EnZip(System.String,System.String,System.String)">
+      <summary>
+            压缩
+            </summary>
+      <param name="zipname">The zipname.</param>
+      <param name="zippath">The zippath.</param>
+      <param name="dirpath">The dirpath.</param>
+      <exception cref="T:System.Exception">
+      </exception>
+    </member>
+    <member name="T:DCSoft.Utility.VerifyCodeModel">
+      <summary>
+            要生成的验证码模式
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.VerifyCodeModel.Alphanumeric">
+      <summary>
+            字母和数字混合验证码
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.VerifyCodeModel.Chinese">
+      <summary>
+            中文验证码
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Weather.BaiDuCityWeather">
+      <summary>
+            获取百度天气
+            参考：http://blog.csdn.net/ztxnight/article/details/44153257/
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Weather.BaiDuCityWeather.GetTodayWeatherByCity(System.String)">
+      <summary>
+            根据百度天气API接口获取某城市最近几天内天气预报描述
+            </summary>
+      <param name="cityName">城市名称</param>
+      <returns>天气结果</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Weather.BaiDuCityWeather.GetWeatherByCity(System.String)">
+      <summary>
+            根据百度天气API接口获取某城市最近几天内的天气预报情况
+            </summary>
+      <param name="cityName">城市名称</param>
+      <returns>天气结果</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Weather.BaiduWeather">
+      <summary>
+            百度天气
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeather.error">
+      <summary>
+            状态码
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeather.status">
+      <summary>
+            状态描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeather.date">
+      <summary>
+            当前日期
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeather.results">
+      <summary>
+            天气
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Weather.BaiduWeatherResult">
+      <summary>
+            天气结果
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherResult.currentCity">
+      <summary>
+            查询天气的城市
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherResult.pm25">
+      <summary>
+            pm值
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherResult.index">
+      <summary>
+            穿衣洗车等描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherResult.weather_data">
+      <summary>
+            最近几天天气状态
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Weather.BaiduWeatherIndex">
+      <summary>
+            穿衣等各项指标描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherIndex.title">
+      <summary>
+            标题，描述类型
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherIndex.zs">
+      <summary>
+            舒适指数
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherIndex.tipt">
+      <summary>
+            指标类型
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWeatherIndex.des">
+      <summary>
+            指标描述
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Weather.BaiduWatherData">
+      <summary>
+            每日天气描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.date">
+      <summary>
+            当前日期及实时温度
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.dayPictureUrl">
+      <summary>
+            白日天气图片
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.nightPictureUrl">
+      <summary>
+            夜晚天气图片
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.weather">
+      <summary>
+            天气描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.wind">
+      <summary>
+            风力描述
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Weather.BaiduWatherData.temperature">
+      <summary>
+            温度范围
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Web.HttpClient">
+      <summary>
+            httpclient处理类
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.KeepContext">
+      <summary>
+            是否自动在不同的请求间保留Cookie, Referer
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.DefaultLanguage">
+      <summary>
+            期望的回应的语言
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.DefaultEncoding">
+      <summary>
+            GetString()如果不能从HTTP头或Meta标签中获取编码信息,则使用此编码来获取字符串
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.Verb">
+      <summary>
+            指示发出Get请求还是Post请求
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.Files">
+      <summary>
+            要上传的文件.如果不为空则自动转为Post请求
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.PostingData">
+      <summary>
+            要发送的Form表单信息
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.Url">
+      <summary>
+            获取或设置请求资源的地址
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.ResponseHeaders">
+      <summary>
+            用于在获取回应后,暂时记录回应的HTTP头
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.Accept">
+      <summary>
+            获取或设置期望的资源类型
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.UserAgent">
+      <summary>
+            获取或设置请求中的Http头User-Agent的值
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.Context">
+      <summary>
+            获取或设置Cookie及Referer
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.StartPoint">
+      <summary>
+            获取或设置获取内容的起始点,用于断点续传,多线程下载等
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.HttpClient.EndPoint">
+      <summary>
+            获取或设置获取内容的结束点,用于断点续传,多下程下载等.
+            如果为0,表示获取资源从StartPoint开始的剩余内容
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.#ctor">
+      <summary>
+            构造新的HttpClient实例
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.#ctor(System.String)">
+      <summary>
+            构造新的HttpClient实例
+            </summary>
+      <param name="url">要获取的资源的地址</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.#ctor(System.String,DCSoft.Utility.Web.HttpClientContext)">
+      <summary>
+            构造新的HttpClient实例
+            </summary>
+      <param name="url">要获取的资源的地址</param>
+      <param name="context">Cookie及Referer</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.#ctor(System.String,DCSoft.Utility.Web.HttpClientContext,System.Boolean)">
+      <summary>
+            构造新的HttpClient实例
+            </summary>
+      <param name="url">要获取的资源的地址</param>
+      <param name="context">Cookie及Referer</param>
+      <param name="keepContext">是否自动在不同的请求间保留Cookie, Referer</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.AttachFile(System.String,System.String)">
+      <summary>
+            在请求中添加要上传的文件
+            </summary>
+      <param name="fileName">要上传的文件路径</param>
+      <param name="fieldName">文件字段的名称(相当于&lt;input type=file name=fieldName&gt;)里的fieldName)</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.AttachFile(System.Byte[],System.String,System.String)">
+      <summary>
+            在请求中添加要上传的文件
+            </summary>
+      <param name="data">要上传的文件内容</param>
+      <param name="fileName">文件名</param>
+      <param name="fieldName">文件字段的名称(相当于&lt;input type=file name=fieldName&gt;)里的fieldName)</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.Reset">
+      <summary>
+            清空PostingData, Files, StartPoint, EndPoint, ResponseHeaders, 并把Verb设置为Get.
+            在发出一个包含上述信息的请求后,必须调用此方法或手工设置相应属性以使下一次请求不会受到影响.
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.GetResponse">
+      <summary>
+            发出一次新的请求,并返回获得的回应
+            调用此方法永远不会触发StatusUpdate事件.
+            </summary>
+      <returns>相应的HttpWebResponse</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.GetStream">
+      <summary>
+            发出一次新的请求,并返回回应内容的流
+            调用此方法永远不会触发StatusUpdate事件.
+            </summary>
+      <returns>包含回应主体内容的流</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.GetBytes">
+      <summary>
+            发出一次新的请求,并以字节数组形式返回回应的内容
+            调用此方法会触发StatusUpdate事件
+            </summary>
+      <returns>包含回应主体内容的字节数组</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.GetString">
+      <summary>
+            发出一次新的请求,以Http头,或Html Meta标签,或DefaultEncoding指示的编码信息对回应主体解码
+            调用此方法会触发StatusUpdate事件
+            </summary>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.GetString(System.Text.Encoding)">
+      <summary>
+            发出一次新的请求,对回应的主体内容以指定的编码进行解码
+            调用此方法会触发StatusUpdate事件
+            </summary>
+      <param name="encoding">指定的编码</param>
+      <returns>解码后的字符串</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.HeadContentLength">
+      <summary>
+            发出一次新的Head请求,获取资源的长度
+            此请求会忽略PostingData, Files, StartPoint, EndPoint, Verb
+            </summary>
+      <returns>返回的资源长度</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.SaveAsFile(System.String)">
+      <summary>
+            发出一次新的请求,把回应的主体内容保存到文件
+            调用此方法会触发StatusUpdate事件
+            如果指定的文件存在,它会被覆盖
+            </summary>
+      <param name="fileName">要保存的文件路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.HttpClient.SaveAsFile(System.String,DCSoft.Utility.Web.FileExistsAction)">
+      <summary>
+            发出一次新的请求,把回应的主体内容保存到文件
+            调用此方法会触发StatusUpdate事件
+            </summary>
+      <param name="fileName">要保存的文件路径</param>
+      <param name="existsAction">指定的文件存在时的选项</param>
+      <returns>是否向目标文件写入了数据</returns>
+    </member>
+    <member name="P:DCSoft.Utility.Web.StatusUpdateEventArgs.BytesGot">
+      <summary>
+            已经下载的字节数
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.StatusUpdateEventArgs.BytesTotal">
+      <summary>
+            资源的总字节数
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHCache">
+      <summary>
+            实现用于 Web 应用程序的缓存，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCache.Get``1(System.String)">
+      <summary>
+                获取当前应用程序的 System.Web.Caching.Cache 中存放的指定键的值
+                如果异常或获取为 null，则返回当前类型的默认值 default(Ttype)
+                </summary>
+      <typeparam name="Ttype">最终要得到的数据类型</typeparam>
+      <param name="key">缓存键</param>
+      <returns>返回指定类型的缓存值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCache.Get``1(System.String,``0)">
+      <summary>
+                获取当前应用程序的 System.Web.Caching.Cache 中存放的指定键的值
+                </summary>
+      <typeparam name="Ttype">最终要得到的数据类型</typeparam>
+      <param name="key">缓存键</param>
+      <param name="defaultValue">默认值，当异常或获取值为 null 时，将返回该默认值</param>
+      <returns>返回指定类型的缓存值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCache.Set(System.String,System.Object,System.DateTime)">
+      <summary>
+                将指定项添加到 System.Web.Caching.Cache 对象
+                使用较高的优先级别，在服务器释放系统内存时，具有该优先级级别的缓存项最不可能被从缓存删除
+                </summary>
+      <param name="key">缓存键</param>
+      <param name="value">缓存值</param>
+      <param name="absoluteExpiration">所添加对象将到期并被从缓存中移除的时间</param>
+      <returns>返回一个值，该值指示缓存是否设置成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCache.Set(System.String,System.Object,System.DateTime,System.Web.Caching.CacheItemPriority)">
+      <summary>
+               将指定项添加到 System.Web.Caching.Cache 对象
+               </summary>
+      <param name="key">缓存键</param>
+      <param name="value">缓存值</param>
+      <param name="absoluteExpiration">所添加对象将到期并被从缓存中移除的时间</param>
+      <param name="priority">对象的相对成本，由 System.Web.Caching.CacheItemPriority 枚举表示。缓存在退出对象时使用该值；具有较低成本的对象在具有较高成本的对象之前被从缓存移除</param>
+      <returns>返回一个值，该值指示缓存是否设置成功</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHCookie">
+      <summary>
+            获取或设置 Cookie 的值，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCookie.Get``1(System.String)">
+      <summary>
+                 获取 Cookie 中指定键的值，已去除首尾空格并解码，如果异常或获取为 null，则返回当前类型的默认值 default(Ttype)
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCookie.Get``1(System.String,``0)">
+      <summary>
+                获取 Cookie 中指定键的值，已去除首尾空格并解码
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <param name="defaultValue">如果获取值为 null，或者转换异常则返回默认值</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCookie.Set(System.String,System.String)">
+      <summary>
+                设置 Cookie 的值，该 value 值会被去除首尾空格并编码后写入 Cookie
+                </summary>
+      <param name="name">键名称</param>
+      <param name="value">要写入的值</param>
+      <returns>返回一个值，该值指示是否设置成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHCookie.Set(System.String,System.String,System.Nullable{System.DateTime})">
+      <summary>
+              设置 Cookie 的值，该 value 值会被去除首尾空格并编码后写入 Cookie
+              </summary>
+      <param name="name">键名称</param>
+      <param name="value">要写入的值</param>
+      <param name="expires">设置该 Cookie 的过期日期和时间</param>
+      <returns>返回一个值，该值指示是否设置成功</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHMessageBox">
+      <summary>
+             页面弹出提示框，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.Show(System.String)">
+      <summary>
+               在页面展现前弹出提示
+               </summary>
+      <param name="message">提示信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.Show(System.String,System.Boolean)">
+      <summary>
+                在页面展现前弹出提示
+                </summary>
+      <param name="message">提示信息</param>
+      <param name="isEnd">是否结束页面输出</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.Show(System.Web.UI.Page,System.String)">
+      <summary>
+              在页面 Form 开始标记之后弹出提示
+              </summary>
+      <param name="page">要弹出提示的 Page (一般用 this.Page)</param>
+      <param name="message">提示信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.Show(System.Web.UI.Page,System.String,System.Boolean)">
+      <summary>
+              在指定的位置弹出提示框
+              </summary>
+      <param name="page">要弹出提示的 Page (一般用 this.Page)</param>
+      <param name="message">提示信息</param>
+      <param name="beforForm">是否在页面 Form 开始标记之后立即弹出提示框（true：是；false：在 Form 结束标记之前）</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.ShowAndClose(System.String)">
+      <summary>
+               在页面展现前弹出提示，并结束页面输出关闭页面
+               </summary>
+      <param name="message">提示信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHMessageBox.ShowAndClose(System.Web.UI.Page,System.String)">
+      <summary>
+               在页面 Form 开始标记之后弹出提示，关闭页面
+               </summary>
+      <param name="page">要弹出提示的 Page (一般用 this.Page)</param>
+      <param name="message">提示信息</param>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHModalDialog">
+      <summary>
+                    为处理 JS ShowModalDialog 提供支持，该类为密封类
+                    </summary>
+      <example>
+                    父级页面使用模式对话框的示例
+                    <code lang="JS">
+                    var obj = new Object();
+                    window.showModalDialog(url, obj, 'resizable:no;scroll:yes;status:no;dialogWidth=100px;dialogHeight=100px;center=yes;help=no');
+                    if(obj.IsSucceed){ 
+                        //执行成功
+                       //这里可以访问后台传的参数信息，比如：alert(obj.Name);
+                       //可以作其它的操作，比如刷新当前页面
+                    }else if(obj.IsSucceed == false){
+                       //执行失败，可以弹出异常信息，作其它操作
+                       if(obj.Message.length &gt; 0){
+                           alert("操作失败！\r\n" + obj.Message);
+                       }else{
+                           alert("操作失败！");
+                       }
+                    }
+                    </code></example>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationFailed">
+      <summary>
+               执行失败，关闭模式对话框并回传父窗体数据
+               这里固定为父窗体参数对象传递属性：
+                  IsSucceed = false
+                  Message = "异常信息"
+               </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationFailed(System.String)">
+      <summary>
+               执行失败，关闭模式对话框并回传父窗体数据
+               这里固定为父窗体参数对象传递属性：
+                  IsSucceed = false
+                  Message = "异常信息"
+               </summary>
+      <param name="message">异常信息</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationFailed(System.String,System.Boolean)">
+      <summary>
+              执行失败，关闭模式对话框并回传父窗体数据
+              这里固定为父窗体参数对象传递属性：
+                 IsSucceed = false
+                 Message = "异常信息"
+              </summary>
+      <param name="message">异常信息</param>
+      <param name="isEnd">是否结束当前页面输出</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded">
+      <summary>
+            执行成功，关闭模式对话框
+            这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded(System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+               执行成功，关闭模式对话框并回传父窗体数据
+               字典的主键对应父窗体参数对象的属性名，字典值为属性值（可以为任意的 JS 类型或函数）
+               这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+               </summary>
+      <param name="returnsArgs">要回传的数据字典</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded(System.String)">
+      <summary>
+               执行成功，关闭模式对话框并回传父窗体数据
+               这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+               </summary>
+      <param name="script">需要执行的 JS 脚本，可以为需要回传的数据，比如：object.Name = '测试'</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded``1(``0)">
+      <summary>
+                执行成功，关闭模式对话框并回传父窗体数据
+                以当前类型的类名称作为父窗体参数对象的属性，类型的属性作为该属性的属性名，属性的值作为 JS 对应类型返回，值为 null 则忽略
+                这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+                C# 和 JS 类型对照：
+                DateTime -- string、bool -- bool、数字 -- 数字、其他 -- 字符串
+                </summary>
+      <typeparam name="Tmodel">要返回对象的类型</typeparam>
+      <param name="model">要返回的对象</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded(System.String,System.Boolean)">
+      <summary>
+                执行成功，关闭模式对话框并回传父窗体数据，回传对象使用固定变量 object
+                这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+                </summary>
+      <param name="script">需要执行的 JS 脚本，可以为需要回传的数据，比如：object.Name = '测试'</param>
+      <param name="isEnd">是否结束当前页面输出</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHModalDialog.OperationSucceeded``1(``0,System.String)">
+      <summary>
+                执行成功，关闭模式对话框并回传父窗体数据
+                以当前类型的类名称作为父窗体参数对象的属性，类型的属性作为该属性的属性名，属性的值作为 JS 对应类型返回，值为 null 则忽略
+                这里固定为父窗体参数对象传递属性 object.IsSucceed = true
+                C# 和 JS 类型对照：
+                DateTime -- string、bool -- bool、数字 -- 数字、其他 -- 字符串
+                </summary>
+      <typeparam name="Tmodel">要返回对象的类型</typeparam>
+      <param name="model">要返回的对象</param>
+      <param name="dateFormat">日期类型的格式化字符串</param>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHRegisterJS">
+      <summary>
+            向页面注册 JS，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRegisterJS.Register(System.Web.UI.Page,System.String)">
+      <summary>
+               在页面 Form 开始标记之后注册 JS 脚本，异常时无脚本执行
+               </summary>
+      <param name="page">要注册脚本的 Page (一般用 this.Page)</param>
+      <param name="script">要注册的 JS 脚本</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRegisterJS.Register(System.Web.UI.Page,System.String,System.Boolean)">
+      <summary>
+                向页面注册 JS 脚本，异常时无脚本执行
+                </summary>
+      <param name="page">要注册脚本的 Page (一般用 this.Page)</param>
+      <param name="script">要注册的 JS 脚本</param>
+      <param name="beforForm">是否在页面 Form 开始标记之后立即执行（true：是；false：在 Form 结束标记之前执行）</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRegisterJS.Register(System.Web.UI.Page,System.String,System.String)">
+      <summary>
+                在页面 Form 开始标记之后注册 JS 脚本
+                </summary>
+      <param name="page">要注册脚本的 Page (一般用 this.Page)</param>
+      <param name="script">要注册的 JS 脚本</param>
+      <param name="exception">异常时执行的 JS 脚本</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRegisterJS.Register(System.Web.UI.Page,System.String,System.String,System.Boolean)">
+      <summary>
+               向页面注册 JS 脚本
+               </summary>
+      <param name="page">要注册脚本的 Page (一般用 this.Page)</param>
+      <param name="script">要注册的 JS 脚本</param>
+      <param name="exception"> 异常时执行的 JS 脚本</param>
+      <param name="beforForm">是否在页面 Form 开始标记之后立即执行（true：是；false：在 Form 结束标记之前执行）</param>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHRequest">
+      <summary>
+             获取当前 HTTP 请求的信息，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetFormData``1(System.String)">
+      <summary>
+                获取 HTTP 查询字符串变量集合中指定键的值，已去除首尾空格，如果异常或获取为 null，则返回当前类型的默认值 default(Ttype)
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetFormData``1(System.String,``0)">
+      <summary>
+                获取 HTTP 查询字符串变量集合中指定键的值，已去除首尾空格
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <param name="defaultValue">如果获取值为 null，或者转换异常则返回默认值</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetQueryData``1(System.String)">
+      <summary>
+               获取窗体变量集合中指定键的值，已去除首尾空格
+               </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetQueryData``1(System.String,``0)">
+      <summary>
+                获取窗体变量集合中指定键的值，已去除首尾空格
+                </summary>
+      <typeparam name="Ttype">要返回的数据类型，如 int, string, DateTime 等</typeparam>
+      <param name="name">要获取的键名称</param>
+      <param name="defaultValue">如果获取值为 null，或者转换异常则返回默认值</param>
+      <returns>返回指定键的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetServerVariable(System.String)">
+      <summary>
+                获取 Web 服务器变量集合中的特定项，已去除首尾空格，默认值为 string.Empty
+                </summary>
+      <param name="name">变量名</param>
+      <returns>Web 服务器变量集合中的特定项</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHRequest.GetServerVariable(System.String,System.String)">
+      <summary>
+               获取 Web 服务器变量集合中的特定项，已去除首尾空格，如果获取为 null，则返回默认值 defaultValue
+               </summary>
+      <param name="name">变量名</param>
+      <param name="defaultValue">获取失败的替代值</param>
+      <returns>Web 服务器变量集合中的特定项</returns>
+    </member>
+    <member name="P:DCSoft.Utility.Web.JHRequest.HasSupportCookie">
+      <summary>
+            获取一个值，该值指示浏览器是否支持 Cookie
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.JHRequest.HistoryUrl">
+      <summary>
+            返回上次请求 URL 的地址，不存在返回 string.Empty
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.JHRequest.UserHostIP">
+      <summary>
+            获取客户端的 IP 主机地址
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.JHRequest.UserHostName">
+      <summary>
+            获取客户端的 DNS 名称
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHResponse">
+      <summary>
+             将 HTTP 响应数据发送到客户端，并包含有关该响应的信息，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteBinary(System.String)">
+      <summary>
+                将文件以二进制字符串的形式写入 HTTP 输出流（弹出打开、保存框），异常直接抛出
+                </summary>
+      <param name="path">文件的相对路径或绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteBinary(System.String,System.String)">
+      <summary>
+                将文件以二进制字符串的形式写入 HTTP 输出流（弹出打开、保存框），异常直接抛出
+                </summary>
+      <param name="path">文件的相对路径或绝对路径</param>
+      <param name="fileName">文件输出时的名称(带后缀)</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteBinary(System.Byte[],System.String)">
+      <summary>
+               将文件以二进制字符串的形式写入 HTTP 输出流（弹出打开、保存框），异常直接抛出
+               </summary>
+      <param name="buffer">二进制数组</param>
+      <param name="fileName">文件输出时的名称(带后缀)</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteFile(System.String)">
+      <summary>
+                [支持断点续传] 以文件流的形式输出文件（弹出文件打开、保存框），并结束页面输出，异常将直接抛出
+                </summary>
+      <param name="path">文件的相对路径或绝对路径</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteFile(System.String,System.String)">
+      <summary>
+                [支持断点续传] 以文件流的形式输出文件（弹出文件打开、保存框），并结束页面输出，异常将直接抛出
+                </summary>
+      <param name="path">文件的相对路径或绝对路径</param>
+      <param name="fileName">文件输出时的名称(带后缀)</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHResponse.WriteFile(System.String,System.String,System.Boolean)">
+      <summary>
+                [支持断点续传] 以文件流的形式输出文件（弹出文件打开、保存框），异常将直接抛出
+                </summary>
+      <param name="path">文件的相对路径或绝对路径</param>
+      <param name="fileName">文件输出时的名称(带后缀)</param>
+      <param name="endResponse">是否结束当前页面输出</param>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHServer">
+      <summary>
+            提供用于处理 Web 请求的 Helper 方法，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHServer.CreateStaticPage(System.String)">
+      <summary>
+                在当前请求的上下文中执行指定虚拟路径的处理程序，将生成的输出以 HTML 文件保存到虚礼路径相同的目录下，异常将直接抛出
+                </summary>
+      <param name="virtualPath">要执行的 URL 虚礼路径</param>
+      <returns>返回一个值，该值指示目标文件是否生成成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHServer.CreateStaticPage(System.String,System.String)">
+      <summary>
+                在当前请求的上下文中执行指定虚拟路径的处理程序，将生成后的输出保存到文件，异常将直接抛出
+                </summary>
+      <param name="virtualPath">要执行的 URL 虚礼路径</param>
+      <param name="targetPath">要保存的目标文件完全限定名</param>
+      <returns>返回一个值，该值指示目标文件是否生成成功</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHServer.UrlEncode(System.String)">
+      <summary>
+               将字符串转换为 URL 编码的字符串
+               </summary>
+      <remarks>和 HttpUtility.UrlEncode 的区别在于空格字符的编码，HttpUtility.UrlEncode 会将空格字符编码为 + </remarks>
+      <param name="str">要编码的字符串</param>
+      <returns>返回转换后的字符串</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHWebControl">
+      <summary>
+                    帮助处理 Web 控件的相关信息，该类为密封类
+                    </summary>
+      <remarks>
+        <b>该类方法对控件进行取值或赋值操作，会损耗一定的性能，但可避免大量重复的编码工作</b>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValue(System.Web.UI.Control,System.String)">
+      <summary>
+                获取控件指定属性的值，异常直接抛出
+                </summary>
+      <remarks>属性不存在或者没有 get 访问器，则读取 Attributes 中的值</remarks>
+      <param name="control">Web 服务器控件</param>
+      <param name="propertyName">属性名称，不区分大小写</param>
+      <returns>返回指定属性的值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValue``1(System.Web.UI.Control,System.String)">
+      <summary>
+               获取控件指定属性的值，如果获取值为 null 则返回 default(Ttype)，异常直接抛出
+               </summary>
+      <remarks>属性不存在或者没有 get 访问器，则读取 Attributes 中的值</remarks>
+      <typeparam name="Ttype">要返回值的类型</typeparam>
+      <param name="control">Web 服务器控件</param>
+      <param name="propertyName">属性名称，不区分大小写</param>
+      <returns>返回转换后的获取值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValue(System.Web.UI.Page,System.Data.DataTable)">
+      <summary>
+                获取页面中控件的值，赋值给表格首行中对应列，如果表格行数为零，则自动创建并附加新行，异常直接抛出
+                </summary>
+      <param name="page">要获取值的页面</param>
+      <param name="dataTable">要赋值的表格对象</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法取值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应取值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValue``1(System.Web.UI.Page,``0)">
+      <summary>
+               获取页面中控件的值，赋值给对应的对象属性中，异常直接抛出
+               </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要获取值的页面</param>
+      <param name="model">对象实体</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法取值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应取值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValueForSuffix(System.Web.UI.Page,System.Data.DataTable,System.String)">
+      <summary>
+             获取页面中控件的值，赋值给表格首行中对应列，如果表格行数为零，则自动创建并附加新行，异常直接抛出
+             </summary>
+      <param name="page">要获取值的页面</param>
+      <param name="dataTable">要赋值的表格对象</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法取值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应取值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.GetValueForSuffix``1(System.Web.UI.Page,``0,System.String)">
+      <summary>
+                获取页面中控件的值，赋值给对应的对象属性中，异常直接抛出
+                </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要获取值的页面</param>
+      <param name="model">对象实体</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法取值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应取值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValue(System.Web.UI.Page,System.Data.DataTable)">
+      <summary>
+               将指定表格首行中对应列的值，赋值到页面中对应的控件属性中，异常直接抛出
+               </summary>
+      <param name="page">要赋值的页面</param>
+      <param name="dataTable">要取值的表格对象</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValue``1(System.Web.UI.Page,``0)">
+      <summary>
+                将指定对象的属性值，赋值到页面中对应的控件属性中，异常直接抛出
+                </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要赋值的页面</param>
+      <param name="model">对象实体</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValue(System.Web.UI.Control,System.String,System.Object)">
+      <summary>
+             给控件指定属性赋值，异常直接抛出
+             </summary>
+      <remarks>如果属性不存在或者属性无 set 访问器，则设置 Attributes 的值</remarks>
+      <param name="control">Web 服务器控件</param>
+      <param name="propertyName">属性名称，不区分大小写</param>
+      <param name="propertyValue">属性值</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValue(System.Web.UI.Page,System.Data.DataTable,System.String)">
+      <summary>
+             将指定表格首行中对应列的值，赋值到页面中对应的控件属性中，异常直接抛出
+             </summary>
+      <param name="page">要赋值的页面</param>
+      <param name="dataTable">要取值的表格对象</param>
+      <param name="dateFormat">DateTime 格式字符串</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValue``1(System.Web.UI.Page,``0,System.String)">
+      <summary>
+                将指定对象的属性值，赋值到页面中对应的控件属性中，异常直接抛出
+                </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要赋值的页面</param>
+      <param name="model">对象实体</param>
+      <param name="dateFormat">DateTime 格式字符串</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValueForSuffix(System.Web.UI.Page,System.Data.DataTable,System.String)">
+      <summary>
+            将指定表格首行中对应列的值，赋值到页面中对应的控件属性中，异常直接抛出
+            </summary>
+      <param name="page">要赋值的页面</param>
+      <param name="dataTable">要取值的表格对象</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValueForSuffix``1(System.Web.UI.Page,``0,System.String)">
+      <summary>
+                将指定对象的属性值，赋值到页面中对应的控件属性中，异常直接抛出
+                </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要赋值的页面</param>
+      <param name="model">对象实体</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValueForSuffix(System.Web.UI.Page,System.Data.DataTable,System.String,System.String)">
+      <summary>
+            将指定表格首行中对应列的值，赋值到页面中对应的控件属性中，异常直接抛出
+            </summary>
+      <param name="page">要赋值的页面</param>
+      <param name="dataTable">要取值的表格对象</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <param name="dateFormat">DateTime 格式字符串</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWebControl.SetValueForSuffix``1(System.Web.UI.Page,``0,System.String,System.String)">
+      <summary>
+               将指定对象的属性值，赋值到页面中对应的控件属性中，异常直接抛出
+               </summary>
+      <typeparam name="Tmodel">对象类型</typeparam>
+      <param name="page">要赋值的页面</param>
+      <param name="model">对象实体</param>
+      <param name="suffix">属性对应控件的后缀，主要为应付多表在同一页面中展现并且字段名重复的情况</param>
+      <param name="dateFormat">DateTime 格式字符串</param>
+      <remarks>
+        <b>以下是控件的命名规范（前缀加属性名），只有按照规范命名控件才能使用该方法赋值</b>
+        <list type="table">
+          <listheader>
+            <item>序号</item>
+            <item>控件类型</item>
+            <item>前缀</item>
+            <item>对应赋值的属性名</item>
+            <item>命名示例</item>
+          </listheader>
+          <item>
+            <item>1</item>
+            <item>文本输入框（无论是微软的还是自定义的，或多文本输入框）</item>
+            <item>txt</item>
+            <item>Text</item>
+            <item>txtNAME</item>
+          </item>
+          <item>
+            <item>2</item>
+            <item>HTML文本框控件作为服务端控件运行的</item>
+            <item>htxt</item>
+            <item>Value</item>
+            <item>htxtNAME</item>
+          </item>
+          <item>
+            <item>3</item>
+            <item>下拉列表（无论微软的还是自定义的）</item>
+            <item>ddl</item>
+            <item>SelectedValue</item>
+            <item>ddlNAME</item>
+          </item>
+          <item>
+            <item>4</item>
+            <item>HTML SELECT 作为服务端控件运行</item>
+            <item>hddl</item>
+            <item>Value</item>
+            <item>hddlNAME</item>
+          </item>
+          <item>
+            <item>5</item>
+            <item>隐藏控件</item>
+            <item>hid</item>
+            <item>Value</item>
+            <item>hidNAME</item>
+          </item>
+          <item>
+            <item>6</item>
+            <item>显示文本标签控件（asp:Lable）</item>
+            <item>lbl</item>
+            <item>Text</item>
+            <item>lblNAME</item>
+          </item>
+          <item>
+            <item>7</item>
+            <item>复选框（CheckBox或HTML INPUT 标记为checkbox类型的控件）</item>
+            <item>chk</item>
+            <item>Checked</item>
+            <item>chkNAME</item>
+          </item>
+          <item>
+            <item>8</item>
+            <item>单选按钮控件(RadioButton或HTML INPUT标记为radio类型的控件) </item>
+            <item>rdb</item>
+            <item>Checked</item>
+            <item>rdbNAME</item>
+          </item>
+          <item>
+            <item>9</item>
+            <item>单选按钮列表控件（RadioButtonList） </item>
+            <item>rdl</item>
+            <item>SelectedValue</item>
+            <item>rdlNAME</item>
+          </item>
+          <item>
+            <item>10</item>
+            <item>一些日期控件，比如自定义的 STDateTextBox</item>
+            <item>date</item>
+            <item>CurrentDate</item>
+            <item>dateCreateTime</item>
+          </item>
+        </list>
+      </remarks>
+    </member>
+    <member name="T:DCSoft.Utility.Web.JHWriteJS">
+      <summary>
+              在页面顶部输出 JS，该类为密封类
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWriteJS.Write(System.String)">
+      <summary>
+               向页面顶部写 JS 脚本（异常时无脚本执行）
+               </summary>
+      <param name="script"> JS 脚本字符串</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWriteJS.Write(System.String,System.Boolean)">
+      <summary>
+                向页面顶部写 JS 脚本，异常时无脚本执行
+                </summary>
+      <param name="script"> JS 脚本字符串</param>
+      <param name="isEnd"> JS 执行后是否结束页面输出</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWriteJS.Write(System.String,System.String)">
+      <summary>
+                向页面顶部写 JS 脚本, 并结束页面输出
+                </summary>
+      <param name="script"> JS 脚本字符串</param>
+      <param name="exception">异常时执行的 JS </param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.JHWriteJS.Write(System.String,System.String,System.Boolean)">
+      <summary>
+                向页面顶部写 JS 脚本
+                </summary>
+      <param name="script"> JS 脚本字符串</param>
+      <param name="exception">异常时执行的 JS </param>
+      <param name="isEnd"> JS 执行后是否结束页面输出</param>
+    </member>
+    <member name="T:DCSoft.Utility.Web.MySoapHeader">
+      <summary>
+            webservice 用户验证
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.userName">
+      <summary>
+            userName
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.passWord">
+      <summary>
+            passWord
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.loginUserId">
+      <summary>
+            登陆ID
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.roleLevel">
+      <summary>
+            角色等级
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.roleCode">
+      <summary>
+            角色等级
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.supplementCode">
+      <summary>
+            管理单位、平台编码
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.MySoapHeader.customTag">
+      <summary>
+            自定义信息
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Web.MyException">
+      <summary>
+            异常信息
+            </summary>
+    </member>
+    <member name="T:DCSoft.Utility.Web.ResponseMessage">
+      <summary>
+            接口返回对象
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.ResponseMessage.status">
+      <summary>
+            返回状态值，0代表正常情况，其他自定
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.ResponseMessage.message">
+      <summary>
+            正常返回实际需要的内容；错误时返回错误信息
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.#ctor">
+      <summary>
+            构造方法
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.#ctor(System.Int32)">
+      <summary>
+            构造方法
+            <param name="status">返回状态值</param></summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.#ctor(System.Int32,System.Object)">
+      <summary>
+            构造方法
+            </summary>
+      <param name="status">返回状态值</param>
+      <param name="message">返回内容</param>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.Default(System.Object)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="message">返回内容</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.Success(System.Object)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="message">返回内容</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.Error(System.Object)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="errorMessage">返回内容</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.ToJson">
+      <summary>
+            json 序列化
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseMessage.ToJson(Newtonsoft.Json.JsonSerializerSettings)">
+      <summary>
+            json 序列化
+            </summary>
+      <param name="settings">Json序列化配置项</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.ResponseResult">
+      <summary>
+            响应结果类
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.ResponseResult.Status">
+      <summary>
+            状态
+            </summary>
+      <value>The status.</value>
+    </member>
+    <member name="P:DCSoft.Utility.Web.ResponseResult.Message">
+      <summary>
+            消息内容
+            </summary>
+      <value>The message.</value>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.Default(System.String)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="message">The message.</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.Success(System.String)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="message">The message.</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.Error(System.String)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="errorMessage">The error message.</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.Parse(System.String)">
+      <summary>
+            解析返回结果中的状态标志位
+            </summary>
+      <param name="message">The message.</param>
+      <returns>
+        <c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.Deserialize(System.String)">
+      <summary>
+            Deserializes the specified message.
+            </summary>
+      <param name="message">The message.</param>
+      <returns>ResponseResult.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult.ToJson">
+      <summary>
+            json 序列化
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.ResponseResult`1">
+      <summary>
+            响应消息类
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+    </member>
+    <member name="P:DCSoft.Utility.Web.ResponseResult`1.Entity">
+      <summary>
+            业务实体
+            </summary>
+      <value>The entity.</value>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult`1.Default">
+      <summary>
+            响应消息封装类
+            </summary>
+      <returns>ResponseResult&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult`1.Success(`0,System.String)">
+      <summary>
+            响应消息封装类
+            </summary>
+      <param name="t">The t.</param>
+      <param name="message">The message.</param>
+      <returns>ResponseResult&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult`1.Error(System.String)">
+      <summary>
+            Http 响应消息封装类
+            </summary>
+      <param name="message">The message.</param>
+      <returns>ResponseResult&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.ResponseResult`1.Deserialize(System.String)">
+      <summary>
+            Http 响应消息反序列化类
+            </summary>
+      <param name="message">The message.</param>
+      <returns>ResponseResult&lt;T&gt;.</returns>
+    </member>
+    <member name="T:DCSoft.Utility.Web.WebServiceHelper`1">
+      <summary>
+            webservices的帮助类
+            </summary>
+      <typeparam name="T">SoapHttpClientProtocol的派生类（webservices生成的代理类）</typeparam>
+    </member>
+    <member name="P:DCSoft.Utility.Web.WebServiceHelper`1.service">
+      <summary>
+            当前的webservice对象
+            </summary>
+    </member>
+    <member name="P:DCSoft.Utility.Web.WebServiceHelper`1.myheader">
+      <summary>
+            soapheader对象
+            </summary>
+    </member>
+    <member name="F:DCSoft.Utility.Web.WebServiceHelper`1._appSetName">
+      <summary>
+            webconfig配置项
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.WebServiceHelper`1.#ctor">
+      <summary>
+            默认指定web.config中“webserviceUrl”配置项为webservice的url地址
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Web.WebServiceHelper`1.SetSoapHeader``1(``0)">
+      <summary>
+            设置soapheader
+            </summary>
+      <typeparam name="K">soapheader的类型</typeparam>
+      <param name="soapHeader">soapheader对象</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.WebServiceHelper`1.Init(System.String)">
+      <summary>
+            初始化
+            </summary>
+      <param name="appSetName">webservice连接url在web.config配置项键名</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.WebServiceHelper`1.Init``1(System.String,``0)">
+      <summary>
+            初始化webserviceHelp
+            </summary>
+      <typeparam name="K">soapheader的类型</typeparam>
+      <param name="appSetName">webservice连接url在web.config配置项键名</param>
+      <param name="soapHeader">soapheader对象</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:DCSoft.Utility.Web.WebServiceHelper`1.Init">
+      <summary>
+            初始化
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:DCSoft.Utility.Cache.JHStaticCache`1">
+      <summary>
+                      存放少量缓存的处理类，该类为密封类
+                      </summary>
+      <remarks>
+                         可以通过指定 CacheHour 设置缓存时间，如果未设置则自动查找配置文件 appsettings 节点下配置项 StaticCacheHour 的值，
+                         如果未配置或配置异常，则使用默认值 12，单位小时
+                      </remarks>
+      <typeparam name="T">要缓存的数据的数据类型</typeparam>
+    </member>
+    <member name="M:DCSoft.Utility.Cache.JHStaticCache`1.Clear">
+      <summary>
+            清空所有的缓存
+            </summary>
+    </member>
+    <member name="M:DCSoft.Utility.Cache.JHStaticCache`1.Get(System.String[])">
+      <summary>
+               获取指定主键的缓存数据，如果不存在或过期则返回指定类型的默认值（default(T)）
+               </summary>
+      <param name="cacheKeys">缓存主键组成部分的列表</param>
+      <returns>返回缓存中的数据，如果不存在或过期则返回指定类型的默认值</returns>
+    </member>
+    <member name="M:DCSoft.Utility.Cache.JHStaticCache`1.Insert(`0,System.String[])">
+      <summary>
+                插入一条缓存，如果存在则更新，否则添加
+                </summary>
+      <param name="item">要放入缓存的数据</param>
+      <param name="cacheKeys">缓存主键组成部分的列表</param>
+    </member>
+    <member name="M:DCSoft.Utility.Cache.JHStaticCache`1.Remove(System.String[])">
+      <summary>
+               删除指定缓存主键对应的缓存
+               </summary>
+      <param name="cacheKeys">缓存主键组成部分的列表</param>
+    </member>
+    <member name="P:DCSoft.Utility.Cache.JHStaticCache`1.CacheHour">
+      <summary>
+               缓存时间(单位小时)
+               </summary>
+      <remarks>
+               如果未设置该值，则默认读取 appsettings 配置项目 StaticCacheHour 的值，
+               如果配置节信息也没有，则使用默认值 12
+               </remarks>
+    </member>
+    <member name="T:Utils.ExcelHelper">
+      <summary>
+            Excel操作类
+            </summary>
+            Microsoft Excel 11.0 Object Library
+        </member>
+    <member name="M:Utils.ExcelHelper.DataTable1Excel(System.Data.DataTable)">
+      <summary> 
+            导出Excel文件，自动返回可下载的文件流 
+            </summary>
+    </member>
+    <member name="M:Utils.ExcelHelper.DataTable2Excel(System.Data.DataTable)">
+      <summary>
+            导出Excel文件，转换为可读模式
+            </summary>
+    </member>
+    <member name="M:Utils.ExcelHelper.DataTable3Excel(System.Data.DataTable,System.String)">
+      <summary>
+            导出Excel文件，并自定义文件名
+            </summary>
+    </member>
+    <member name="M:Utils.ExcelHelper.OutputToExcel(System.Data.DataTable,System.String)">
+      <summary>
+            将数据导出至Excel文件
+            </summary>
+      <param name="table">DataTable对象</param>
+      <param name="excelFilePath">Excel文件路径</param>
+    </member>
+    <member name="M:Utils.ExcelHelper.OutputToExcel(System.Data.DataTable,System.Collections.ArrayList,System.String)">
+      <summary>
+            将数据导出至Excel文件
+            </summary>
+      <param name="Table">DataTable对象</param>
+      <param name="columns">要导出的数据列集合</param>
+      <param name="ExcelFilePath">Excel文件路径</param>
+    </member>
+    <member name="M:Utils.ExcelHelper.GetExcelTables(System.String)">
+      <summary>
+            获取Excel文件数据表列表
+            </summary>
+    </member>
+    <member name="M:Utils.ExcelHelper.InputFromExcel(System.String,System.String)">
+      <summary>
+            将Excel文件导出至DataTable(第一行作为表头)
+            </summary>
+      <param name="excelFilePath">Excel文件路径</param>
+      <param name="tableName">数据表名，如果数据表名错误，默认为第一个数据表名</param>
+    </member>
+    <member name="M:Utils.ExcelHelper.GetExcelTableColumns(System.String,System.String)">
+      <summary>
+            获取Excel文件指定数据表的数据列表
+            </summary>
+      <param name="excelFileName">Excel文件名</param>
+      <param name="tableName">数据表名</param>
+    </member>
+    <member name="M:Utils.ExcelHelper.DataTableExcel(System.Data.DataTable,System.String,System.String)">
+      <summary>
+            DataTable导出到Excel
+            </summary>
+      <param name="pData">DataTable</param>
+      <param name="pFileName">导出文件名</param>
+      <param name="pHeader">导出标题以|分割</param>
+    </member>
+  </members>
+</doc>

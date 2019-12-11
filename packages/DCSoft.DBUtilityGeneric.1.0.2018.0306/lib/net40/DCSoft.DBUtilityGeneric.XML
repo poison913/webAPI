@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>DCSoft.DBUtilityGeneric</name>
+  </assembly>
+  <members>
+    <member name="T:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1">
+      <summary>
+            DAL 访问数据的基类，封装了常用的数据操作及查询方法
+            </summary>
+      <typeparam name="T">Dos.ORM 模型类</typeparam>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.GetDbSession">
+      <summary>
+            获取DbSession对象，默认使用web.config中配置的conn连接字符串，等效于 DB.Context
+            </summary>
+      <returns>DbSession.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getEntity(System.String)">
+      <summary>
+            获取一条记录，单主键，不适用于视图
+            </summary>
+      <param name="key">主键</param>
+      <returns>T.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getEntity(Dos.ORM.Where{`0})">
+      <summary>
+            获取一条记录 
+            </summary>
+      <param name="where">where条件</param>
+      <returns>T.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getEntity(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object})">
+      <summary>
+            获取一条记录，根据条件查询
+            </summary>
+      <param name="dict">字典参数查询条件</param>
+      <returns>T.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getList">
+      <summary>
+            获取所有记录列表数据
+            </summary>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getList(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object})">
+      <summary>
+            根据字典参数查询满足条件的记录集合
+            </summary>
+      <param name="dict">字典参数查询条件</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getList(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object},Dos.ORM.OrderByClip)">
+      <summary>
+            根据字典参数及排序查询满足条件的记录集合
+            </summary>
+      <param name="dict">字典参数查询条件</param>
+      <param name="orderby">排序条件</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getList(Dos.ORM.Where{`0})">
+      <summary>
+            根据where条件查询满足条件的记录集合
+            </summary>
+      <param name="where">查询条件</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getList(Dos.ORM.Where{`0},Dos.ORM.OrderByClip)">
+      <summary>
+            根据where条件及排序查询满足条件的记录集合
+            </summary>
+      <param name="where">查询条件</param>
+      <param name="orderby">排序条件</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataTable">
+      <summary>
+            获取所有记录列表数据
+            </summary>
+      <returns>DataTable.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataTable(System.String)">
+      <summary>
+            执行sql 返回DataTable
+            </summary>
+      <param name="sql">sql语句，不支持参数</param>
+      <returns>DataTable.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataTable(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object})">
+      <summary>
+            获取条件查询列表
+            </summary>
+      <param name="dict">字典参数查询条件</param>
+      <returns>DataTable.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataTable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            执行sql 返回DataTable
+            </summary>
+      <param name="sql">sql语句</param>
+      <param name="dict">字典参数查询条件</param>
+      <returns>DataTable.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataSet(System.String)">
+      <summary>
+            执行sql 返回DataSet
+            </summary>
+      <param name="sql">sql语句，不支持参数</param>
+      <returns>DataSet.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataSet(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            执行sql 返回DataTable
+            </summary>
+      <param name="sql">sql语句</param>
+      <param name="dict">字典参数查询参数</param>
+      <returns>DataSet.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getPage(System.Int32,System.Int32,System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object})">
+      <summary>
+            根据字典参数查询查询分页数据
+            </summary>
+      <param name="pageSize">每页记录数</param>
+      <param name="pageIndex">当前页码</param>
+      <param name="dict">字典参数查询条件，模糊匹配</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getPage(System.Int32,System.Int32,System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object},Dos.ORM.OrderByClip)">
+      <summary>
+            根据字典参数及排序查询查询分页数据
+            </summary>
+      <param name="pageSize">每页记录数</param>
+      <param name="pageIndex">当前页码</param>
+      <param name="dict">查询条件，模糊匹配（使用like）</param>
+      <param name="orderby">排序</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getPage(System.Int32,System.Int32,Dos.ORM.Where{`0},Dos.ORM.OrderByClip)">
+      <summary>
+            根据where条件及排序查询查询分页数据
+            </summary>
+      <param name="pageSize">每页记录数</param>
+      <param name="pageIndex">当前页码</param>
+      <param name="where">查询条件</param>
+      <param name="orderby">排序</param>
+      <returns>List&lt;T&gt;.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.add(`0)">
+      <summary>
+            添加记录
+            </summary>
+      <param name="entity">记录实体对象</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.addBatch(System.Collections.Generic.List{`0})">
+      <summary>
+            批量添加记录操作
+            </summary>
+      <param name="list">记录实体对象列表</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.addOrUpdate(`0)">
+      <summary>
+            添加或更新记录，存在则更新，不存在则添加
+            </summary>
+      <param name="entity">记录实体对象</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.addOrUpdateAll(`0)">
+      <summary>
+            添加或更新记录，存在则更新，不存在则添加,更新时候使用UpdateAll
+            </summary>
+      <param name="entity">记录实体对象</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.update(`0)">
+      <summary>
+            更新记录
+            </summary>
+      <param name="entity">记录实体对象，仅更新更改的字段</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.updateAll(`0)">
+      <summary>
+            更新记录的所有字段
+            </summary>
+      <param name="entity">记录实体对象，更新所有字段</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.update(Dos.ORM.Field,System.Object,Dos.ORM.Field,System.Object)">
+      <summary>
+            单主键，单字段更新
+            </summary>
+      <param name="keyField">主键</param>
+      <param name="keyValue">主键值</param>
+      <param name="updateField">待更新字段</param>
+      <param name="updateValue">待更新字段值</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.updateBatch(System.Collections.Generic.List{`0})">
+      <summary>
+            批量更新操作
+            </summary>
+      <param name="list">待更新实体列表，仅更新更改的字段</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.update(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            单记录，多主键，多字段进行更新
+            </summary>
+      <param name="dictKeys">主键Dictionary</param>
+      <param name="dictUpdateFileds">待更新Dictionary，注意key值与字段名称相对应</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.delete(`0)">
+      <summary>
+            根据对象删除记录
+            </summary>
+      <param name="entity">实体记录对象</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.delete(System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            单记录，多主键（条件）
+            </summary>
+      <param name="dictKeyValues">字典参数主键（条件）及值</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.delete(System.String[])">
+      <summary>
+            删除多条（单主键）记录
+            </summary>
+      <param name="keys">主键集合</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.delete(System.String)">
+      <summary>
+            单主键（条件）
+            </summary>
+      <param name="key">主键</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.delete(Dos.ORM.Where{`0})">
+      <summary>
+            根据where条件删除记录
+            </summary>
+      <param name="where">条件</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getCount">
+      <summary>
+            获取总记录数
+            </summary>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getCount(System.Collections.Generic.Dictionary{Dos.ORM.Field,System.Object})">
+      <summary>
+            有条件获取总记录数
+            </summary>
+      <param name="dict">字典参数</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getCount(Dos.ORM.Where{`0})">
+      <summary>
+            有条件获取总记录数
+            </summary>
+      <param name="where">条件</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.execSql(System.String)">
+      <summary>
+            执行sql语句
+            </summary>
+      <param name="sql">sql，不支持参数</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.execSql(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            执行sql语句
+            </summary>
+      <param name="sql">sql</param>
+      <param name="dict">字典参数</param>
+      <returns>System.Int32.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataTableByExecProc(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            执行存储过程，返回DataTable
+            </summary>
+      <param name="procName">存储过程名称</param>
+      <param name="dictParams">存储过程参数</param>
+      <returns>DataTable.</returns>
+    </member>
+    <member name="M:DCSoft.DBUtilityGeneric.DAL.BaseDAL`1.getDataSetByExecProc(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+      <summary>
+            执行存储过程，返回DataSet
+            </summary>
+      <param name="procName">存储过程名称</param>
+      <param name="dictParams">存储过程参数</param>
+      <returns>DataSet.</returns>
+    </member>
+  </members>
+</doc>
